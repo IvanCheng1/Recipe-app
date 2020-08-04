@@ -12,7 +12,6 @@ import Recipe from "../components/Recipe";
 import { Searchbar } from "react-native-paper";
 import { handleReceiveRecipes } from "../actions/recipes";
 
-
 function mapStateToProps({ recipes }) {
   return {
     recipes,
@@ -21,12 +20,13 @@ function mapStateToProps({ recipes }) {
 
 class Recipes extends Component {
   state = {
-    recipes: [],
+    recipes: {},
     query: "",
   };
 
   componentDidMount() {
     this.props.dispatch(handleReceiveRecipes()).then(() => {
+      const recipes = this.props.recipes;
       this.setState({ recipes: this.props.recipes });
     });
   }
@@ -39,12 +39,12 @@ class Recipes extends Component {
     if (query === "") {
       // reset
       this.setState({ recipes });
-      // console.log(recipes)
     }
 
     const filtered = Object.values(recipes).filter((item) => {
       return item.title.includes(query);
     });
+
 
     if (filtered) {
       // console.log(filtered)
@@ -56,18 +56,22 @@ class Recipes extends Component {
     // console.log(this.state.recipes);
   };
 
-  renderItem = ({ item }) => {
+  renderItem = (thing) => {
     const { recipes } = this.state;
+    const item = thing.item;
     const recipe = recipes[item];
+    console.log(thing);
 
     return (
       <TouchableOpacity onPress={() => this.navigateToRecipe(recipe, item)}>
         <Recipe recipe={recipe} />
       </TouchableOpacity>
+      // <Text>hi</Text>
     );
   };
 
   navigateToRecipe = (recipe, key) => {
+    // console.log(recipe, key)
     this.props.navigation.navigate("Recipe Page", {
       id: key,
       name: recipe.title,
@@ -76,6 +80,7 @@ class Recipes extends Component {
 
   render() {
     const { recipes } = this.state;
+    // const list = Object.keys(recipes)
 
     return (
       <SafeAreaView style={myStyles.container}>
@@ -89,6 +94,7 @@ class Recipes extends Component {
           <FlatList
             style={myStyles.recipeList}
             data={Object.keys(recipes)}
+            extraData={this.state}
             renderItem={this.renderItem}
             numColumns={2}
             keyExtractor={(item) => item}

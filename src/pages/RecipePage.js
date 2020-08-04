@@ -31,21 +31,18 @@ class RecipePage extends Component {
           <TouchableOpacity
             style={myStyles.btn}
             onPress={() => alert("Add to Shopping List")}
-            // key={"add"}
           >
             <Text style={myStyles.btnText}>Add to Shopping List</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={myStyles.btn}
             onPress={() => alert("Edit Recipe")}
-            // key={"edit"}
           >
             <Text style={myStyles.btnText}>Edit Recipe</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[myStyles.btn, myStyles.btnDark]}
             onPress={() => alert("Delete Recipe")}
-            // key={"delete"}
           >
             <Text style={myStyles.btnText}>Delete Recipe</Text>
           </TouchableOpacity>
