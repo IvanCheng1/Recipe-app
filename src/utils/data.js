@@ -4,7 +4,7 @@ export const recipes = {
     ingredients: {
       spices: {
         'curry powder': "200g",
-        'pepper': "1 tablespoon",
+        'pepper': "1 tbsp",
       },
       items: {
         "chicken": "250g",
@@ -12,6 +12,7 @@ export const recipes = {
       },
       veg: {
         "broccoli": "1kg",
+        "tomatoes": "2kg",
       }
     },
     notes: "Not too difficult, but takes a while to make",
@@ -22,7 +23,7 @@ export const recipes = {
     ingredients: {
       spices: {
         'curry powder': "222g",
-        'pepper': "1 tablespoon",
+        'pepper': "1 tbsp",
       },
       items: {
         "Cauliflower": "250g",
@@ -40,7 +41,7 @@ export const recipes = {
     ingredients: {
       spices: {
         'curry powder': "222g",
-        'pepper': "1 tablespoon",
+        'pepper': "1 tbsp",
       },
       items: {
         "Cauliflower": "250g",
@@ -57,7 +58,7 @@ export const recipes = {
     ingredients: {
       spices: {
         'curry powder': "222g",
-        'pepper': "1 tablespoon",
+        'pepper': "1 tbsp",
       },
       items: {
         "Cauliflower": "250g",
@@ -75,7 +76,7 @@ export const recipes = {
     ingredients: {
       spices: {
         'curry powder': "222g",
-        'pepper': "1 tablespoon",
+        'pepper': "1 tbsp",
       },
       items: {
         "Cauliflower": "250g",

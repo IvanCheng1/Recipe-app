@@ -8,14 +8,14 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-// import { getRecipes } from "../utils/api";
 import Recipe from "../components/Recipe";
 import { Searchbar } from "react-native-paper";
 import { handleReceiveRecipes } from "../actions/recipes";
 
-function mapStateToProps(state) {
+
+function mapStateToProps({ recipes }) {
   return {
-    state,
+    recipes,
   };
 }
 
@@ -26,21 +26,40 @@ class Recipes extends Component {
   };
 
   componentDidMount() {
-    // getRecipes().then((recipes) => this.setState({ recipes }));
-
     this.props.dispatch(handleReceiveRecipes()).then(() => {
-      this.setState({ recipes: this.props.state.recipes });
+      this.setState({ recipes: this.props.recipes });
     });
   }
 
   onChangeSearch = (query) => {
     this.setState({ query });
+
+    const { recipes } = this.props;
+
+    if (query === "") {
+      // reset
+      this.setState({ recipes });
+      // console.log(recipes)
+    }
+
+    const filtered = Object.values(recipes).filter((item) => {
+      return item.title.includes(query);
+    });
+
+    if (filtered) {
+      // console.log(filtered)
+      this.setState({
+        recipes: filtered,
+      });
+    }
+
+    // console.log(this.state.recipes);
   };
 
-  renderItem = ({item} ) => {
+  renderItem = ({ item }) => {
     const { recipes } = this.state;
-    const recipe = recipes[item]
-    // console.log(key)
+    const recipe = recipes[item];
+
     return (
       <TouchableOpacity onPress={() => this.navigateToRecipe(recipe, item)}>
         <Recipe recipe={recipe} />
@@ -57,22 +76,24 @@ class Recipes extends Component {
 
   render() {
     const { recipes } = this.state;
-    // console.log(Object.keys(recipes));
 
     return (
       <SafeAreaView style={myStyles.container}>
         <Searchbar
           placeholder="Search"
-          onChangeText={this.onChangeSearch}
+          onChangeText={(query) => this.onChangeSearch(query)}
           value={this.state.query}
         />
-        <FlatList
-          style={myStyles.recipeList}
-          data={Object.keys(recipes)}
-          renderItem={this.renderItem}
-          numColumns={2}
-          keyExtractor={(item) => item}
-        />
+
+        {recipes && (
+          <FlatList
+            style={myStyles.recipeList}
+            data={Object.keys(recipes)}
+            renderItem={this.renderItem}
+            numColumns={2}
+            keyExtractor={(item) => item}
+          />
+        )}
       </SafeAreaView>
     );
   }

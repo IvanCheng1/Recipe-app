@@ -13,16 +13,36 @@ class RecipeShoppingList extends Component {
   render() {
     const { id, recipes } = this.props;
     const item = recipes[id];
+    const spices = item.ingredients.spices;
+    const vegs = item.ingredients.veg;
 
     return (
-      <View>
-        <Text>Ingredients</Text>
-        <Text>spices</Text>
-        {Object.keys(item.ingredients.spices).map((spice) => {
+      <View style={[myStyles.recipeShoppingList]}>
+        <Text style={myStyles.recipeIngredientsText}>Ingredients</Text>
+        <Text style={myStyles.recipeCatText}>Spices</Text>
+        {Object.keys(spices).map((spice) => {
           return (
-            <Text key={spice}>
-              {spice} - {item.ingredients.spices[spice]}
-            </Text>
+            <View key={spice} style={myStyles.recipeItemGroup}>
+              <Text style={myStyles.recipeItemQuan}>
+                {spices[spice]}
+              </Text>
+              <Text style={myStyles.recipeItem}>
+                {spice}
+              </Text>
+            </View>
+          );
+        })}
+        <Text style={myStyles.recipeCatText}>Vegetables</Text>
+        {Object.keys(vegs).map((veg) => {
+          return (
+            <View key={veg} style={myStyles.recipeItemGroup}>
+              <Text style={myStyles.recipeItemQuan}>
+                {vegs[veg]}
+              </Text>
+              <Text style={myStyles.recipeItem}>
+                {veg}
+              </Text>
+            </View>
           );
         })}
       </View>
