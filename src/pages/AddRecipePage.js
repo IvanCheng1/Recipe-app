@@ -57,22 +57,6 @@ class AddRecipePage extends Component {
     }));
   };
 
-  // addSpiceInput = (key) => {
-  //   const category = "Spice";
-  //   let spiceInput = this.state.spiceInput;
-
-  //   spiceInput.push(
-  //     <RecipeItemInput
-  //       key={key}
-  //       id={key}
-  //       category={category}
-  //       onChangeItem={this.onChangeItem}
-  //       onChangeQty={this.onChangeQty}
-  //     />
-  //   );
-  //   this.setState({ spiceInput });
-  // };
-
   addInput = (key, category, inputName) => {
     let input = this.state[inputName];
 
@@ -138,7 +122,11 @@ class AddRecipePage extends Component {
               <Button
                 title="+"
                 onPress={() =>
-                  this.addInput(this.state.spiceInput.length + 1, "Spice", "spiceInput")
+                  this.addInput(
+                    this.state.spiceInput.length + 1,
+                    "Spice",
+                    "spiceInput"
+                  )
                 }
               />
             </ScrollView>
@@ -160,7 +148,11 @@ class AddRecipePage extends Component {
               <Button
                 title="+"
                 onPress={() =>
-                  this.addInput(this.state.vegInput.length + 1, "Vegetables", "vegInput")
+                  this.addInput(
+                    this.state.vegInput.length + 1,
+                    "Vegetables",
+                    "vegInput"
+                  )
                 }
               />
             </ScrollView>
@@ -170,7 +162,11 @@ class AddRecipePage extends Component {
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
           onPress={() =>
-            console.log("---------------------\n", this.state.Spice, this.state.Vegetables)
+            console.log(
+              "---------------------\n",
+              this.state.Spice,
+              this.state.Vegetables
+            )
           }
           // disabled={
           //   title === "" || notes === "" || course === "" ? true : false
