@@ -18,21 +18,20 @@ class RecipeShoppingList extends Component {
     const items = [];
 
     for (const [category, list] of Object.entries(ingredients)) {
-      if (Object.keys(list).length === 0) {
+      if (list.length === 0) {
         // category is empty
         continue;
       }
 
       items.push(<Text key={category} style={myStyles.recipeCatText}>{category}</Text>);
-
-      for (const [ingredient, measure] of Object.entries(list)) {
-
+      
+      for (const item of list) {
         items.push(
-          <View key={ingredient} style={myStyles.recipeItemGroup}>
-            <Text style={myStyles.recipeItemQuan}>{measure}</Text>
-            <Text style={myStyles.recipeItem}>{capitaliseWord(ingredient)}</Text>
+          <View key={item.item} style={myStyles.recipeItemGroup}>
+            <Text style={myStyles.recipeItemQuan}>{item.quantity}</Text>
+            <Text style={myStyles.recipeItem}>{capitaliseWord(item.item)}</Text>
           </View>
-        );
+        )
       }
     }
 

@@ -29,9 +29,7 @@ export const recipes = {
           quantity: "1",
         },
       ],
-      Colds: {
-
-      },
+      Colds: [],
       Vegetables: [
         {
           item: 'tomatoes',
@@ -129,7 +127,6 @@ export const recipes = {
           quantity: "2",
         },
       ],
-  
       Frozen: [],
       Dry: [
         {
