@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Container, Tab, Tabs, ScrollableTab, Header } from "native-base";
 import RecipeItemInput from "../components/RecipeItemInput";
+import TabRecipe from "../components/TabRecipe";
 
 function mapStateToProps(state) {
   return {};
@@ -57,8 +58,8 @@ class AddRecipePage extends Component {
     }));
   };
 
-  addInput = (key, category, inputName) => {
-    let input = this.state[inputName];
+  addInput = (key, category, catInput) => {
+    let input = this.state[catInput];
 
     input.push(
       <RecipeItemInput
@@ -69,7 +70,7 @@ class AddRecipePage extends Component {
         onChangeQty={this.onChangeQty}
       />
     );
-    this.setState({ [inputName]: input });
+    this.setState({ [catInput]: input });
   };
 
   render() {
@@ -106,6 +107,17 @@ class AddRecipePage extends Component {
             </ScrollView>
           </Tab>
           <Tab heading="Spices">
+            <TabRecipe
+              category={"Spices"}
+              catInput={this.state.spiceInput}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+              addInput={this.addInput}
+              catInputName={"spiceInput"}
+            />
+          </Tab>
+
+          {/* <Tab heading="Spices">
             <ScrollView>
               <View style={myStyles.addRecipeContainer}>
                 <RecipeItemInput
@@ -130,7 +142,7 @@ class AddRecipePage extends Component {
                 }
               />
             </ScrollView>
-          </Tab>
+          </Tab> */}
           <Tab heading="Vegetables">
             <ScrollView>
               <View style={myStyles.addRecipeContainer}>
