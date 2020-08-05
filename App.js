@@ -11,6 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from '@expo/vector-icons';
 import ShoppingListTab from "./src/pages/ShoppingListTab";
 import RecipeStack from "./src/pages/RecipeStack";
+import AddRecipeStack from "./src/pages/AddRecipeStack";
 
 const store = createStore(reducer, middleware);
 const Tab = createBottomTabNavigator();
@@ -23,14 +24,24 @@ export default class App extends Component {
       <Provider store={store}>
         <StatusBar style="auto" />
         <NavigationContainer>
-          <Tab.Navigator initialRouteName="Recipe">
+          <Tab.Navigator initialRouteName="Recipes">
             <Tab.Screen
-              name="Recipe"
+              name="Recipes"
               component={RecipeStack}
               options={{
-                tabBarLabel: "Recipe",
+                tabBarLabel: "Recipes",
                 tabBarIcon: ({ color }) => (
                   <AntDesign name="home" color={color} size={24} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Add Recipe"
+              component={AddRecipeStack}
+              options={{
+                tabBarLabel: "Add Recipe",
+                tabBarIcon: ({ color }) => (
+                  <AntDesign name="plussquareo" color={color} size={24} />
                 ),
               }}
             />

@@ -1,11 +1,15 @@
 export const recipes = {
   EdamameBeanPasta: {
     title: "Edamame Bean Pasta",
+    course: "main",
     ingredients: {
       Spices: {
         'curry powder': "200g",
         'pepper': "1 tbsp",
-
+        "rapeseed oil": "2 tbsp",
+        "peanut butter": "6 tbsp",
+        "soy sauce": "1 tbsp",
+        "veg stock cube": "1",
       },
       Colds: {
 
@@ -15,6 +19,7 @@ export const recipes = {
         "onions": "2",
         "garlic": "2 cloves",
         "red chilli": "1",
+        "spring onions": "bunch"
       },
       Frozen: {
         "edamame beans": "3 mugs"
@@ -22,6 +27,9 @@ export const recipes = {
       Dry: {
         "pasta": "500g",
         "cornflour": "1 tbsp"
+      },
+      Other: {
+
       }
     },
     notes: "Not too difficult, but takes a while to make",
@@ -29,17 +37,26 @@ export const recipes = {
   },
   KatsuCurry: {
     title: "Katsu Curry",
+    course: "main",
     ingredients: {
-      spices: {
+      Spices: {
         'curry powder': "222g",
         'pepper': "1 tbsp",
       },
-      items: {
-        "Cauliflower": "250g",
-        "broccoli": "1kg",
+      Colds: {
       },
-      veg: {
-        "broccoli": "1kg",
+      Vegetables: {
+        "Cauliflower": "250g",
+      },
+      Frozen: {
+
+      },
+      Dry: {
+        "rice": "500g",
+        "cornflour": "1 tbsp"
+      },
+      Other: {
+        
       }
     },
     notes: "Takes a lot of effort",
@@ -47,16 +64,27 @@ export const recipes = {
   },
   RisottoAndMushrooms: {
     title: "Risotto and Mushrooms",
+    course: "main",
     ingredients: {
-      spices: {
+      Spices: {
         'curry powder': "222g",
         'pepper': "1 tbsp",
       },
-      items: {
-        "Cauliflower": "250g",
+      Colds: {
       },
-      veg: {
+      Vegetables: {
+        "Cauliflower": "250g",
         "broccoli": "1kg",
+      },
+      Frozen: {
+        "edamame beans": "3 mugs"
+      },
+      Dry: {
+        "pasta": "500g",
+        "cornflour": "1 tbsp"
+      },
+      Other: {
+        
       }
     },
     notes: "",
@@ -64,17 +92,27 @@ export const recipes = {
   },
   SpaghettiBolognese: {
     title: "Spaghetti Bolognese",
+    course: "main",
     ingredients: {
-      spices: {
+      Spices: {
         'curry powder': "222g",
         'pepper': "1 tbsp",
       },
-      items: {
-        "Cauliflower": "250g",
-        "broccoli": "1kg",
+      Colds: {
       },
-      veg: {
-        "broccoli": "1kg",
+      Vegetables: {
+        "peppers": "3",
+      },
+      Frozen: {
+        "peas": "2 mugs"
+      },
+      Dry: {
+        "spaghetti": "500g",
+        "cornflour": "1 tbsp",
+        "chopped tomatoes": "1"
+      },
+      Other: {
+        
       }
     },
     notes: "Super easy",
@@ -82,17 +120,27 @@ export const recipes = {
   },
   LentilRagu: {
     title: "Lentil Ragu",
+    course: "main",
     ingredients: {
-      spices: {
+      Spices: {
         'curry powder': "222g",
         'pepper': "1 tbsp",
       },
-      items: {
-        "Cauliflower": "250g",
-        "broccoli": "1kg",
+      Colds: {
+
       },
-      veg: {
-        "broccoli": "1kg",
+      Vegetables: {
+        "carrots": "2",
+      },
+      Frozen: {
+
+      },
+      Dry: {
+        "chopped tomatoes": "1",
+        "passata": "1"
+      },
+      Other: {
+        
       }
     },
     notes: "Slow cooker for 5h on low",

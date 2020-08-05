@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myStyles } from "../utils/myStyles";
 import { Text, View } from "react-native";
+import { capitaliseWord } from "../utils/helpers";
+
 function mapStateToProps({ recipes }, { id }) {
   return {
     id,
@@ -21,14 +23,14 @@ class RecipeShoppingList extends Component {
         continue;
       }
 
-      items.push(<Text style={myStyles.recipeCatText}>{category}</Text>);
+      items.push(<Text key={category} style={myStyles.recipeCatText}>{category}</Text>);
 
       for (const [ingredient, measure] of Object.entries(list)) {
 
         items.push(
           <View key={ingredient} style={myStyles.recipeItemGroup}>
             <Text style={myStyles.recipeItemQuan}>{measure}</Text>
-            <Text style={myStyles.recipeItem}>{ingredient}</Text>
+            <Text style={myStyles.recipeItem}>{capitaliseWord(ingredient)}</Text>
           </View>
         );
       }

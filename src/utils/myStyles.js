@@ -91,13 +91,13 @@ export const myStyles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 1,
     borderRadius: 6,
-    height: 25,
+    height: 30,
   },
   recipeItemQuan: {
     fontSize: 16,
     lineHeight: 25,
     textAlign: "left",
-    marginRight: 10,
+    marginRight: 5,
     marginLeft: 4,
     // width: 50
   },
@@ -125,4 +125,33 @@ export const myStyles = StyleSheet.create({
     color: "#FFF",
     fontSize: 15,
   },
+  input: {
+    padding: 15,
+    borderColor: "#f4511e",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: 300,
+  },
+  inputRecipeGroup: {
+    flexDirection: "row",
+  },
+  inputQuantityLeft: {
+    padding: 15,
+    borderColor: "#f4511e",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: 80,
+  },
+  inputItemRight: {
+    padding: 15,
+    borderColor: "#f4511e",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: 250,
+
+  }
+
 });

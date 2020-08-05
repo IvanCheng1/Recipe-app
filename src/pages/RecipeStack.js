@@ -25,7 +25,7 @@ const RecipeStack = () => {
         name="Home"
         component={Recipes}
         options={{
-          title: "Recipe",
+          title: "Recipes",
         }}
       />
       <Stack.Screen

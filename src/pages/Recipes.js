@@ -39,12 +39,7 @@ class Recipes extends Component {
     if (query === "") {
       // reset
       this.setState({ recipes: recipes });
-      // console.log("reset", recipes, "reset")
     }
-
-    // const filtered = Object.values(recipes).filter((item) => {
-    //   return item.title.toLowerCase().includes(query.toLowerCase());
-    // });
 
     let filtered = {};
 
@@ -63,15 +58,11 @@ class Recipes extends Component {
           }
         }
       }
-      // console.log(key)
     }
 
-    // console.log(filtered, "filter")
-    this.setState((prev) => ({
+    this.setState({
       recipes: filtered,
-    }));
-
-    // console.log(this.state.recipes);
+    });
   };
 
   renderItem = (item) => {
@@ -82,12 +73,16 @@ class Recipes extends Component {
       <TouchableOpacity onPress={() => this.navigateToRecipe(recipe, item)}>
         <Recipe recipe={recipe} />
       </TouchableOpacity>
-      // <Text>hi</Text>
     );
   };
 
   navigateToRecipe = (recipe, key) => {
-    // console.log(recipe, key)
+    //reset
+    this.setState({
+      query: "",
+      recipes: this.props.recipes,
+    });
+
     this.props.navigation.navigate("Recipe Page", {
       id: key,
       name: recipe.title,
@@ -96,10 +91,6 @@ class Recipes extends Component {
 
   render() {
     const { recipes } = this.state;
-    // const list = recipes
-    // const keys = Object.keys(list);
-    // console.log(Object.keys(recipes))
-    // console.log(recipes, "recipes");
 
     return (
       <SafeAreaView style={myStyles.container}>
