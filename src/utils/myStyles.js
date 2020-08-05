@@ -64,7 +64,7 @@ export const myStyles = StyleSheet.create({
     resizeMode: "cover",
   },
   recipeShoppingList: {
-    width: '60%',
+    width: "60%",
   },
   recipePadding: {
     lineHeight: 20,
@@ -151,7 +151,12 @@ export const myStyles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
     width: 250,
-
-  }
-
+  },
+  addRecipeContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+  },
 });

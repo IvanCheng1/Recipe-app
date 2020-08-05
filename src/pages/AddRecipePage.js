@@ -21,8 +21,10 @@ class AddRecipePage extends Component {
     title: "",
     notes: "",
     course: "",
-    spiceInput: [],
     Spice: {},
+    spiceInput: [],
+    Vegetables: {},
+    vegInput: [],
   };
 
   onChangeItem = (input, key, category) => {
@@ -55,26 +57,26 @@ class AddRecipePage extends Component {
     }));
   };
 
-  addSpiceInput = (key) => {
-    const category = "Spice";
-    let spiceInput = this.state.spiceInput;
-    // spiceInput.push(
-    //   <View key={key} style={[myStyles.box, myStyles.inputRecipeGroup]}>
-    //     <TextInput
-    //       // value={input}
-    //       style={myStyles.inputItemLeft}
-    //       placeholder="Curry powder..."
-    //       onChangeText={(input) => this.onChangeItem(input, key, category)}
-    //     />
-    //     <TextInput
-    //       // value={'input'}
-    //       style={myStyles.inputQuantityRight}
-    //       placeholder="2 tsbp"
-    //       onChangeText={(input) => this.onChangeQty(input, key, category)}
-    //     />
-    //   </View>
-    // );
-    spiceInput.push(
+  // addSpiceInput = (key) => {
+  //   const category = "Spice";
+  //   let spiceInput = this.state.spiceInput;
+
+  //   spiceInput.push(
+  //     <RecipeItemInput
+  //       key={key}
+  //       id={key}
+  //       category={category}
+  //       onChangeItem={this.onChangeItem}
+  //       onChangeQty={this.onChangeQty}
+  //     />
+  //   );
+  //   this.setState({ spiceInput });
+  // };
+
+  addInput = (key, category, inputName) => {
+    let input = this.state[inputName];
+
+    input.push(
       <RecipeItemInput
         key={key}
         id={key}
@@ -83,81 +85,20 @@ class AddRecipePage extends Component {
         onChangeQty={this.onChangeQty}
       />
     );
-    this.setState({ spiceInput });
+    this.setState({ [inputName]: input });
   };
 
   render() {
-    // const { input } = this.state;
+    const { title, notes, course } = this.state;
     // console.log("------------------------\n", this.state.Spice);
 
     return (
       <Container style={myStyles.container}>
         {/* <Header hasTabs /> */}
         <Tabs>
-          <Tab heading="Spices">
-            <ScrollView>
-              <View style={myStyles.container}>
-                <RecipeItemInput
-                  id={0}
-                  category={"Spice"}
-                  onChangeItem={this.onChangeItem}
-                  onChangeQty={this.onChangeQty}
-                />
-
-                {/* <View key={'0'} style={[myStyles.box, myStyles.inputRecipeGroup]}>
-                  <TextInput
-                    // value={input}
-                    style={myStyles.inputItemLeft}
-                    placeholder="Curry powder..."
-                    onChangeText={(input) =>
-                      this.setState((prev) => ({
-                        Spice: {
-                          ...prev.Spice,
-                          '0': [
-                            {
-                              item: input,
-                              quantity: prev.Spice['0'] ? prev.Spice['0'][0].quantity : ""
-                            },
-                          ],
-                        },
-                      }))
-                    }
-                  />
-                  <TextInput
-                    // value={'input'}
-                    style={myStyles.inputQuantityRight}
-                    placeholder="2 tsbp"
-                    onChangeText={(input) =>
-                      this.setState((prev) => ({
-                        Spice: {
-                          ...prev.Spice,
-                          '0': [
-                            {
-                              quantity: input,
-                              item: prev.Spice['0'] ? prev.Spice['0'][0].item : ""
-                            },
-                          ],
-                        },
-                      }))
-                    }
-                  />
-                </View> */}
-
-                {this.state.spiceInput.map((value, index) => {
-                  return value;
-                })}
-              </View>
-              <Button
-                title="+"
-                onPress={() =>
-                  this.addSpiceInput(this.state.spiceInput.length + 1)
-                }
-              />
-            </ScrollView>
-          </Tab>
           <Tab heading="Details">
             <ScrollView>
-              <View style={myStyles.container}>
+              <View style={myStyles.addRecipeContainer}>
                 {/* <Text style={myStyles.title}>Title</Text> */}
                 <TextInput
                   // value={input}
@@ -180,17 +121,60 @@ class AddRecipePage extends Component {
               </View>
             </ScrollView>
           </Tab>
+          <Tab heading="Spices">
+            <ScrollView>
+              <View style={myStyles.addRecipeContainer}>
+                <RecipeItemInput
+                  id={0}
+                  category={"Spice"}
+                  onChangeItem={this.onChangeItem}
+                  onChangeQty={this.onChangeQty}
+                />
+
+                {this.state.spiceInput.map((value, index) => {
+                  return value;
+                })}
+              </View>
+              <Button
+                title="+"
+                onPress={() =>
+                  this.addInput(this.state.spiceInput.length + 1, "Spice", "spiceInput")
+                }
+              />
+            </ScrollView>
+          </Tab>
+          <Tab heading="Vegetables">
+            <ScrollView>
+              <View style={myStyles.addRecipeContainer}>
+                <RecipeItemInput
+                  id={0}
+                  category={"Vegetables"}
+                  onChangeItem={this.onChangeItem}
+                  onChangeQty={this.onChangeQty}
+                />
+
+                {this.state.vegInput.map((value, index) => {
+                  return value;
+                })}
+              </View>
+              <Button
+                title="+"
+                onPress={() =>
+                  this.addInput(this.state.vegInput.length + 1, "Vegetables", "vegInput")
+                }
+              />
+            </ScrollView>
+          </Tab>
         </Tabs>
-        <TouchableOpacity
-          onPress={() => alert("yay")}
-          // disabled={question === "" || answer === "" ? true : false}
-          title="Add Recipe"
-        />
+        <TouchableOpacity onPress={() => alert("yay")} title="Add Recipe" />
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
           onPress={() =>
-            console.log("---------------------\n", this.state.Spice)
+            console.log("---------------------\n", this.state.Spice, this.state.Vegetables)
           }
+          // disabled={
+          //   title === "" || notes === "" || course === "" ? true : false
+          // }
         >
           <Text style={myStyles.btnText}>Submit</Text>
         </TouchableOpacity>
