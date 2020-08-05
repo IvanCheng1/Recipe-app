@@ -17,11 +17,70 @@ function mapStateToProps(state) {
 
 class AddRecipePage extends Component {
   state = {
-    // title: "",
+    title: "",
+    notes: "",
+    course: "",
+    spiceInput: [],
+    Spice: {},
   };
+
+  onChangeItem = (input, key, category) => {
+    this.setState((prev) => ({
+      [category]: {
+        ...prev[category],
+        [key]: [
+          {
+            item: input,
+            quantity: prev[category][key] ? prev[category][key][0].quantity : ""
+          },
+        ],
+      },
+    }))
+  }
+
+  onChangeQty = (input, key, category) => {
+    this.setState((prev) => ({
+      [category]: {
+        ...prev[category],
+        [key]: [
+          {
+            quantity: input,
+                    item: prev[category][key] ? prev[category][key][0].item : ""
+          },
+        ],
+      },
+    }))
+  }
+
+  addSpiceInput = (key) => {
+    const category = "Spice"
+    let spiceInput = this.state.spiceInput;
+    spiceInput.push(
+      <View key={key} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+        <TextInput
+          // value={input}
+          style={myStyles.inputItemLeft}
+          placeholder="Curry powder..."
+          onChangeText={(input) =>
+            this.onChangeItem(input, key, category)
+          }
+        />
+        <TextInput
+          // value={'input'}
+          style={myStyles.inputQuantityRight}
+          placeholder="2 tsbp"
+          onChangeText={(input) =>
+            this.onChangeQty(input, key, category)
+          }
+        />
+      </View>
+    );
+    this.setState({ spiceInput });
+  };
+
   render() {
     // const { input } = this.state;
-    console.log(this.state);
+    // console.log("------------------------\n", this.state.Spice);
 
     return (
       <Container style={myStyles.container}>
@@ -30,23 +89,52 @@ class AddRecipePage extends Component {
           <Tab heading="Spices">
             <ScrollView>
               <View style={myStyles.container}>
-                {/* <Text style={myStyles.title}>Title</Text> */}
-                <View style={[myStyles.box, myStyles.inputRecipeGroup]}>
-                  <TextInput
-                    // value={'input'}
-                    style={myStyles.inputQuantityLeft}
-                    placeholder="2 tsbp"
-                    onChangeText={(input) => this.setState({ quantity: input })}
-                    editable={true}
-                  />
+                <View key={'0'} style={[myStyles.box, myStyles.inputRecipeGroup]}>
                   <TextInput
                     // value={input}
-                    style={myStyles.inputItemRight}
+                    style={myStyles.inputItemLeft}
                     placeholder="Curry powder..."
-                    onChangeText={(input) => this.setState({ spice: input })}
+                    onChangeText={(input) =>
+                      this.setState((prev) => ({
+                        Spice: {
+                          ...prev.Spice,
+                          '0': [
+                            {
+                              item: input,
+                              quantity: prev.Spice['0'] ? prev.Spice['0'][0].quantity : ""
+                            },
+                          ],
+                        },
+                      }))
+                    }
+                  />
+                  <TextInput
+                    // value={'input'}
+                    style={myStyles.inputQuantityRight}
+                    placeholder="2 tsbp"
+                    onChangeText={(input) =>
+                      this.setState((prev) => ({
+                        Spice: {
+                          ...prev.Spice,
+                          '0': [
+                            {
+                              quantity: input,
+                              item: prev.Spice['0'] ? prev.Spice['0'][0].item : ""
+                            },
+                          ],
+                        },
+                      }))
+                    }
                   />
                 </View>
+                {this.state.spiceInput.map((value, index) => {
+                  return value;
+                })}
               </View>
+              <Button
+                title="+"
+                onPress={() => this.addSpiceInput(this.state.spiceInput.length + 1)}
+              />
             </ScrollView>
           </Tab>
           <Tab heading="Details">
@@ -82,7 +170,7 @@ class AddRecipePage extends Component {
         />
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
-          onPress={() => alert("yay")}
+          onPress={() => console.log("---------------------\n", this.state.Spice)}
         >
           <Text style={myStyles.btnText}>Submit</Text>
         </TouchableOpacity>

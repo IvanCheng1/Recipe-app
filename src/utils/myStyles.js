@@ -136,7 +136,7 @@ export const myStyles = StyleSheet.create({
   inputRecipeGroup: {
     flexDirection: "row",
   },
-  inputQuantityLeft: {
+  inputQuantityRight: {
     padding: 15,
     borderColor: "#f4511e",
     borderWidth: 1,
@@ -144,7 +144,7 @@ export const myStyles = StyleSheet.create({
     marginBottom: 20,
     width: 80,
   },
-  inputItemRight: {
+  inputItemLeft: {
     padding: 15,
     borderColor: "#f4511e",
     borderWidth: 1,

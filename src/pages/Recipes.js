@@ -49,9 +49,12 @@ class Recipes extends Component {
         filtered[key] = item;
         continue;
       } else {
-        for (const category of Object.values(item.ingredients)) {
-          for (const ingredient of Object.keys(category)) {
-            if (ingredient.toLowerCase().includes(query.toLowerCase())) {
+        for (const list of Object.values(item.ingredients)) {
+          if (list.length === 0) {
+            continue;
+          }
+          for (const ingredient of list) {
+            if (ingredient.item.toLowerCase().includes(query.toLowerCase())) {
               filtered[key] = item;
               continue;
             }
