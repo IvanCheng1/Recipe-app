@@ -12,39 +12,33 @@ function mapStateToProps({ recipes }, { id }) {
 class RecipeShoppingList extends Component {
   render() {
     const { id, recipes } = this.props;
-    const item = recipes[id];
-    const spices = item.ingredients.spices;
-    const vegs = item.ingredients.veg;
+    const ingredients = recipes[id].ingredients;
+    const items = [];
+
+    for (const [category, list] of Object.entries(ingredients)) {
+      if (Object.keys(list).length === 0) {
+        // category is empty
+        continue;
+      }
+
+      items.push(<Text style={myStyles.recipeCatText}>{category}</Text>);
+
+      for (const [ingredient, measure] of Object.entries(list)) {
+
+        items.push(
+          <View key={ingredient} style={myStyles.recipeItemGroup}>
+            <Text style={myStyles.recipeItemQuan}>{measure}</Text>
+            <Text style={myStyles.recipeItem}>{ingredient}</Text>
+          </View>
+        );
+      }
+    }
 
     return (
       <View style={[myStyles.recipeShoppingList]}>
         <Text style={myStyles.recipeIngredientsText}>Ingredients</Text>
-        <Text style={myStyles.recipeCatText}>Spices</Text>
-        {Object.keys(spices).map((spice) => {
-          return (
-            <View key={spice} style={myStyles.recipeItemGroup}>
-              <Text style={myStyles.recipeItemQuan}>
-                {spices[spice]}
-              </Text>
-              <Text style={myStyles.recipeItem}>
-                {spice}
-              </Text>
-            </View>
-          );
-        })}
-        <Text style={myStyles.recipeCatText}>Vegetables</Text>
-        {Object.keys(vegs).map((veg) => {
-          return (
-            <View key={veg} style={myStyles.recipeItemGroup}>
-              <Text style={myStyles.recipeItemQuan}>
-                {vegs[veg]}
-              </Text>
-              <Text style={myStyles.recipeItem}>
-                {veg}
-              </Text>
-            </View>
-          );
-        })}
+
+        {items}
       </View>
     );
   }

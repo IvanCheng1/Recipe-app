@@ -38,29 +38,45 @@ class Recipes extends Component {
 
     if (query === "") {
       // reset
-      this.setState({ recipes });
+      this.setState({ recipes: recipes });
+      // console.log("reset", recipes, "reset")
     }
 
-    const filtered = Object.values(recipes).filter((item) => {
-      return item.title.includes(query);
-    });
+    // const filtered = Object.values(recipes).filter((item) => {
+    //   return item.title.toLowerCase().includes(query.toLowerCase());
+    // });
 
+    let filtered = {};
 
-    if (filtered) {
-      // console.log(filtered)
-      this.setState({
-        recipes: filtered,
-      });
+    for (const [key, item] of Object.entries(recipes)) {
+      if (item.title.toLowerCase().includes(query.toLowerCase())) {
+        // if title contains query
+        filtered[key] = item;
+        continue;
+      } else {
+        for (const category of Object.values(item.ingredients)) {
+          for (const ingredient of Object.keys(category)) {
+            if (ingredient.toLowerCase().includes(query.toLowerCase())) {
+              filtered[key] = item;
+              continue;
+            }
+          }
+        }
+      }
+      // console.log(key)
     }
+
+    // console.log(filtered, "filter")
+    this.setState((prev) => ({
+      recipes: filtered,
+    }));
 
     // console.log(this.state.recipes);
   };
 
-  renderItem = (thing) => {
+  renderItem = (item) => {
     const { recipes } = this.state;
-    const item = thing.item;
     const recipe = recipes[item];
-    console.log(thing);
 
     return (
       <TouchableOpacity onPress={() => this.navigateToRecipe(recipe, item)}>
@@ -80,7 +96,10 @@ class Recipes extends Component {
 
   render() {
     const { recipes } = this.state;
-    // const list = Object.keys(recipes)
+    // const list = recipes
+    // const keys = Object.keys(list);
+    // console.log(Object.keys(recipes))
+    // console.log(recipes, "recipes");
 
     return (
       <SafeAreaView style={myStyles.container}>
@@ -93,9 +112,9 @@ class Recipes extends Component {
         {recipes && (
           <FlatList
             style={myStyles.recipeList}
-            data={Object.keys(recipes)}
-            extraData={this.state}
-            renderItem={this.renderItem}
+            data={Object.keys(recipes).sort()}
+            extraData={this.state.recipes}
+            renderItem={({ item }) => this.renderItem(item)}
             numColumns={2}
             keyExtractor={(item) => item}
           />

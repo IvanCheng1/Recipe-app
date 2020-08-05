@@ -1,22 +1,31 @@
 export const recipes = {
-  ChickenCurry: {
-    title: "Chicken Curry",
+  EdamameBeanPasta: {
+    title: "Edamame Bean Pasta",
     ingredients: {
-      spices: {
+      Spices: {
         'curry powder': "200g",
         'pepper': "1 tbsp",
+
       },
-      items: {
-        "chicken": "250g",
-        "broccoli": "1kg",
+      Colds: {
+
       },
-      veg: {
-        "broccoli": "1kg",
-        "tomatoes": "2kg",
+      Vegetables: {
+        "tomatoes": "6",
+        "onions": "2",
+        "garlic": "2 cloves",
+        "red chilli": "1",
+      },
+      Frozen: {
+        "edamame beans": "3 mugs"
+      },
+      Dry: {
+        "pasta": "500g",
+        "cornflour": "1 tbsp"
       }
     },
     notes: "Not too difficult, but takes a while to make",
-    image: "https://image.shutterstock.com/z/stock-photo-curry-chicken-225642772.jpg",
+    image: "https://image.shutterstock.com/z/stock-photo-italian-cuisine-edamame-and-mentaiko-pasta-on-white-background-128504978.jpg",
   },
   KatsuCurry: {
     title: "Katsu Curry",
