@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container, Tab, Tabs, ScrollableTab, Header } from "native-base";
+import RecipeItemInput from "../components/RecipeItemInput";
 
 function mapStateToProps(state) {
   return {};
@@ -31,12 +32,14 @@ class AddRecipePage extends Component {
         [key]: [
           {
             item: input,
-            quantity: prev[category][key] ? prev[category][key][0].quantity : ""
+            quantity: prev[category][key]
+              ? prev[category][key][0].quantity
+              : "",
           },
         ],
       },
-    }))
-  }
+    }));
+  };
 
   onChangeQty = (input, key, category) => {
     this.setState((prev) => ({
@@ -45,35 +48,40 @@ class AddRecipePage extends Component {
         [key]: [
           {
             quantity: input,
-                    item: prev[category][key] ? prev[category][key][0].item : ""
+            item: prev[category][key] ? prev[category][key][0].item : "",
           },
         ],
       },
-    }))
-  }
+    }));
+  };
 
   addSpiceInput = (key) => {
-    const category = "Spice"
+    const category = "Spice";
     let spiceInput = this.state.spiceInput;
+    // spiceInput.push(
+    //   <View key={key} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+    //     <TextInput
+    //       // value={input}
+    //       style={myStyles.inputItemLeft}
+    //       placeholder="Curry powder..."
+    //       onChangeText={(input) => this.onChangeItem(input, key, category)}
+    //     />
+    //     <TextInput
+    //       // value={'input'}
+    //       style={myStyles.inputQuantityRight}
+    //       placeholder="2 tsbp"
+    //       onChangeText={(input) => this.onChangeQty(input, key, category)}
+    //     />
+    //   </View>
+    // );
     spiceInput.push(
-      <View key={key} style={[myStyles.box, myStyles.inputRecipeGroup]}>
-        <TextInput
-          // value={input}
-          style={myStyles.inputItemLeft}
-          placeholder="Curry powder..."
-          onChangeText={(input) =>
-            this.onChangeItem(input, key, category)
-          }
-        />
-        <TextInput
-          // value={'input'}
-          style={myStyles.inputQuantityRight}
-          placeholder="2 tsbp"
-          onChangeText={(input) =>
-            this.onChangeQty(input, key, category)
-          }
-        />
-      </View>
+      <RecipeItemInput
+        key={key}
+        id={key}
+        category={category}
+        onChangeItem={this.onChangeItem}
+        onChangeQty={this.onChangeQty}
+      />
     );
     this.setState({ spiceInput });
   };
@@ -89,7 +97,14 @@ class AddRecipePage extends Component {
           <Tab heading="Spices">
             <ScrollView>
               <View style={myStyles.container}>
-                <View key={'0'} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+                <RecipeItemInput
+                  id={0}
+                  category={"Spice"}
+                  onChangeItem={this.onChangeItem}
+                  onChangeQty={this.onChangeQty}
+                />
+
+                {/* <View key={'0'} style={[myStyles.box, myStyles.inputRecipeGroup]}>
                   <TextInput
                     // value={input}
                     style={myStyles.inputItemLeft}
@@ -126,14 +141,17 @@ class AddRecipePage extends Component {
                       }))
                     }
                   />
-                </View>
+                </View> */}
+
                 {this.state.spiceInput.map((value, index) => {
                   return value;
                 })}
               </View>
               <Button
                 title="+"
-                onPress={() => this.addSpiceInput(this.state.spiceInput.length + 1)}
+                onPress={() =>
+                  this.addSpiceInput(this.state.spiceInput.length + 1)
+                }
               />
             </ScrollView>
           </Tab>
@@ -170,7 +188,9 @@ class AddRecipePage extends Component {
         />
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
-          onPress={() => console.log("---------------------\n", this.state.Spice)}
+          onPress={() =>
+            console.log("---------------------\n", this.state.Spice)
+          }
         >
           <Text style={myStyles.btnText}>Submit</Text>
         </TouchableOpacity>
