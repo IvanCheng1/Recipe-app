@@ -60,7 +60,7 @@ class TabRecipe extends Component {
           })}
         </View>
         <Button
-          title="+"
+          title="Add another row"
           onPress={() =>
             this.addInput(
               input.length + 1,

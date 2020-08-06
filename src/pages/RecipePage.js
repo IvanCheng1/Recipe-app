@@ -17,11 +17,12 @@ class RecipePage extends Component {
     const { id } = this.props.route.params;
     const { recipes } = this.props;
     const item = recipes[id];
+    const image = item.image ? ({uri: item.image}) : require("../images/plate.jpg")
 
     return (
       <ScrollView>
         <View style={myStyles.container}>
-          <Image style={myStyles.imageRecipe} source={{ uri: item.image }} />
+          <Image style={myStyles.imageRecipe} source={image} />
           <Text style={myStyles.title}>{capitaliseWord(item.title)}</Text>
           {item.notes !== "" && (
             <Text style={myStyles.subtitle}>"{item.notes}"</Text>

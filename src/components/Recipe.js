@@ -15,12 +15,13 @@ class Recipe extends Component {
   render() {
     const { recipe } = this.props;
     // console.log(item)
+    const image = recipe.image ? ({uri: recipe.image}) : require("../images/plate.jpg")
 
     return (
       <View style={[myStyles.recipeContainer, myStyles.box]}>
         <Image
           style={myStyles.imageList}
-          source={{ uri: recipe.image }}
+          source={image}
         />
         <Text style={myStyles.recipeTitle}>{capitaliseWord(recipe.title)}</Text>
         <Text style={myStyles.receipeNotes}>{recipe.notes}</Text>

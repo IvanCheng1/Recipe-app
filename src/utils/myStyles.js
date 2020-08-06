@@ -118,6 +118,18 @@ export const myStyles = StyleSheet.create({
     width: 250,
     height: 50,
   },
+  btnSmall: {
+    backgroundColor: "#f56436",
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    width: 150,
+    height: 40,
+  },
   btnDark: {
     backgroundColor: "#bc3409",
   },
@@ -159,4 +171,20 @@ export const myStyles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
   },
+  img: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+    backgroundColor: 'black',
+    borderRadius: 10,
+  },
+  imgPlaceHolder: {
+    width: 300,
+    height: 300,
+    borderColor: "#f4511e",
+    borderWidth: 1,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  }
 });
