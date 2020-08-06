@@ -26,12 +26,12 @@ class AddRecipePage extends Component {
     title: "",
     notes: "",
     course: "",
-    Spice: {},
-    Vegetables: {},
-    Colds: {},
-    Frozen: {},
-    Dry: {},
-    Other: {},
+    // Spice: {},
+    // Vegetables: {},
+    // Colds: {},
+    // Frozen: {},
+    // Dry: {},
+    // Other: {},
     ingredients: {
       Spice: {},
       Vegetables: {},
@@ -49,11 +49,16 @@ class AddRecipePage extends Component {
 
   onChangeItem = (input, key, category) => {
     this.setState((prev) => ({
-      [category]: {
-        ...prev[category],
-        [key]: {
-          item: input,
-          quantity: prev[category][key] ? prev[category][key].quantity : "",
+      ingredients: {
+        ...prev.ingredients,
+        [category]: {
+          ...prev.ingredients[category],
+          [key]: {
+            item: input,
+            quantity: prev.ingredients[category][key]
+              ? prev.ingredients[category][key].quantity
+              : "",
+          },
         },
       },
     }));
@@ -61,11 +66,14 @@ class AddRecipePage extends Component {
 
   onChangeQty = (input, key, category) => {
     this.setState((prev) => ({
-      [category]: {
-        ...prev[category],
-        [key]: {
-          quantity: input,
-          item: prev[category][key] ? prev[category][key].item : "",
+      ingredients: {
+        ...prev.ingredients,
+        [category]: {
+          ...prev.ingredients[category],
+          [key]: {
+            quantity: input,
+            item: prev.ingredients[category][key] ? prev.ingredients[category][key].item : "",
+          },
         },
       },
     }));
@@ -111,51 +119,65 @@ class AddRecipePage extends Component {
     r.course = submitRecipe.course;
     r.notes = submitRecipe.notes;
     r.image = submitRecipe.image;
+    r.ingredients = {}
 
-    console.log(r, "r ------------");
+    for (const [category, objs] of Object.entries(submitRecipe.ingredients)) {
+      // console.log(category, objs)
+      // initialise list for each category
+      r.ingredients[category] = []
 
-    const recipe = {
-      title: "Chicken Curry",
-      course: "main",
-      ingredients: {
-        Spices: [
-          {
-            item: "curry powder",
-            quantity: "222g",
-          },
-          {
-            item: "pepper",
-            quantity: "1 tbsp",
-          },
-        ],
-        Colds: [],
-        Vegetables: [
-          {
-            item: "cauliflower",
-            quantity: "222g",
-          },
-        ],
-        Frozen: [],
-        Dry: [
-          {
-            item: "rice",
-            quantity: "500g",
-          },
-          {
-            item: "cornflour",
-            quantity: "1 tbsp",
-          },
-        ],
-        Other: [],
-      },
-      notes: "Takes a lot of effort",
-      image: this.state.image,
-    };
+      for (const item of Object.values(objs)) {
+        r.ingredients[category].push(item)
+      }
+    }
 
-    const recipeId = recipe.title.replace(/\s+/g, "");
+    const recipeId = r.title.replace(/\s+/g, "");
+
+
+    // console.log(r, "r ------------");
+
+    // const recipe = {
+    //   title: "Chicken Curry",
+    //   course: "main",
+    //   ingredients: {
+    //     Spices: [
+    //       {
+    //         item: "curry powder",
+    //         quantity: "222g",
+    //       },
+    //       {
+    //         item: "pepper",
+    //         quantity: "1 tbsp",
+    //       },
+    //     ],
+    //     Colds: [],
+    //     Vegetables: [
+    //       {
+    //         item: "cauliflower",
+    //         quantity: "222g",
+    //       },
+    //     ],
+    //     Frozen: [],
+    //     Dry: [
+    //       {
+    //         item: "rice",
+    //         quantity: "500g",
+    //       },
+    //       {
+    //         item: "cornflour",
+    //         quantity: "1 tbsp",
+    //       },
+    //     ],
+    //     Other: [],
+    //   },
+    //   notes: "Takes a lot of effort",
+    //   image: this.state.image,
+    // };
+
+    // const recipeId = recipe.title.replace(/\s+/g, "");
 
     // add recipe
-    // this.props.dispatch(handleCreateRecipes(recipe, recipeId));
+    this.props.dispatch(handleCreateRecipes(r, recipeId));
 
     // set state
     // this.setState({
