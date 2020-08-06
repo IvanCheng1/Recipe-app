@@ -5,6 +5,7 @@ import { Text, View, Image, ScrollView } from "react-native";
 import RecipeShoppingList from "../components/RecipeShoppingList";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { capitaliseWord } from "../utils/helpers";
+import { handleDeleteRecipes } from "../actions/recipes";
 
 function mapStateToProps({ recipes }) {
   return {
@@ -13,11 +14,23 @@ function mapStateToProps({ recipes }) {
 }
 
 class RecipePage extends Component {
+  onSubmit = (id) => {
+    this.props.dispatch(handleDeleteRecipes(id));
+    this.props.navigation.navigate("Home");
+  };
+
   render() {
     const { id } = this.props.route.params;
     const { recipes } = this.props;
     const item = recipes[id];
-    const image = item.image ? ({uri: item.image}) : require("../images/plate.jpg")
+
+    if (!item) {
+      return <View></View>
+    }
+
+    const image = item.image
+      ? { uri: item.image }
+      : require("../images/plate.jpg");
 
     return (
       <ScrollView>
@@ -45,7 +58,7 @@ class RecipePage extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[myStyles.btn, myStyles.btnDark]}
-            onPress={() => alert("Delete Recipe")}
+            onPress={() => this.onSubmit(id)}
           >
             <Text style={myStyles.btnText}>Delete Recipe</Text>
           </TouchableOpacity>

@@ -22,6 +22,11 @@ export default function recipes(state = {}, action) {
           image: action.recipe.image,
         },
       };
+    case REMOVE_RECIPES:
+      delete state[action.recipeId];
+      return {
+        ...state,
+      }
     default:
       return state;
   }

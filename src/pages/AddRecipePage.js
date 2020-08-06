@@ -26,12 +26,6 @@ class AddRecipePage extends Component {
     title: "",
     notes: "",
     course: "",
-    // Spice: {},
-    // Vegetables: {},
-    // Colds: {},
-    // Frozen: {},
-    // Dry: {},
-    // Other: {},
     ingredients: {
       Spice: {},
       Vegetables: {},
@@ -41,6 +35,7 @@ class AddRecipePage extends Component {
       Other: {},
     },
     image: null,
+    update: false,
   };
 
   componentDidMount() {
@@ -72,7 +67,9 @@ class AddRecipePage extends Component {
           ...prev.ingredients[category],
           [key]: {
             quantity: input,
-            item: prev.ingredients[category][key] ? prev.ingredients[category][key].item : "",
+            item: prev.ingredients[category][key]
+              ? prev.ingredients[category][key].item
+              : "",
           },
         },
       },
@@ -112,86 +109,44 @@ class AddRecipePage extends Component {
     // alert("Saving Recipe");
     const submitRecipe = this.state;
 
-    // console.log(submitRecipe)
-
-    let r = {};
-    r.title = submitRecipe.title;
-    r.course = submitRecipe.course;
-    r.notes = submitRecipe.notes;
-    r.image = submitRecipe.image;
-    r.ingredients = {}
+    let recipe = {};
+    recipe.title = submitRecipe.title;
+    recipe.course = submitRecipe.course;
+    recipe.notes = submitRecipe.notes;
+    recipe.image = submitRecipe.image;
+    recipe.ingredients = {};
 
     for (const [category, objs] of Object.entries(submitRecipe.ingredients)) {
-      // console.log(category, objs)
       // initialise list for each category
-      r.ingredients[category] = []
+      recipe.ingredients[category] = [];
 
       for (const item of Object.values(objs)) {
-        r.ingredients[category].push(item)
+        recipe.ingredients[category].push(item);
       }
     }
 
-    const recipeId = r.title.replace(/\s+/g, "");
-
-
-    // console.log(r, "r ------------");
-
-    // const recipe = {
-    //   title: "Chicken Curry",
-    //   course: "main",
-    //   ingredients: {
-    //     Spices: [
-    //       {
-    //         item: "curry powder",
-    //         quantity: "222g",
-    //       },
-    //       {
-    //         item: "pepper",
-    //         quantity: "1 tbsp",
-    //       },
-    //     ],
-    //     Colds: [],
-    //     Vegetables: [
-    //       {
-    //         item: "cauliflower",
-    //         quantity: "222g",
-    //       },
-    //     ],
-    //     Frozen: [],
-    //     Dry: [
-    //       {
-    //         item: "rice",
-    //         quantity: "500g",
-    //       },
-    //       {
-    //         item: "cornflour",
-    //         quantity: "1 tbsp",
-    //       },
-    //     ],
-    //     Other: [],
-    //   },
-    //   notes: "Takes a lot of effort",
-    //   image: this.state.image,
-    // };
-
-    // const recipeId = recipe.title.replace(/\s+/g, "");
-
-    // add recipe
-    this.props.dispatch(handleCreateRecipes(r, recipeId));
+    const recipeId = recipe.title.replace(/\s+/g, "");
 
     // set state
-    // this.setState({
-    //   title: "",
-    //   notes: "",
-    //   course: "",
-    //   Spice: {},
-    //   Vegetables: {},
-    //   Colds: {},
-    //   Frozen: {},
-    //   Dry: {},
-    //   Other: {},
-    //   image: null,
-    // });
+    this.setState({
+      title: "",
+      notes: "",
+      course: "",
+      ingredients: {
+        Spice: {},
+        Vegetables: {},
+        Colds: {},
+        Frozen: {},
+        Dry: {},
+        Other: {},
+      },
+      notes: "",
+      image: null,
+      update: true,
+    });
+
+    // add recipe
+    this.props.dispatch(handleCreateRecipes(recipe, recipeId));
 
     // go to home
     // this.props.navigation.navigate("Home");
@@ -204,13 +159,19 @@ class AddRecipePage extends Component {
 
   render() {
     const { title, notes, course } = this.state;
-    console.log("------------------------\n", this.state);
+    // console.log("------------------------\n", this.state);
     const { image } = this.state;
+
+    if (this.state.update) {
+      this.setState({
+        update: false,
+      });
+    }
 
     return (
       <Container style={myStyles.container}>
         {/* <Header hasTabs /> */}
-        <Tabs renderTabBar={() => <ScrollableTab />}>
+        <Tabs renderTabBar={() => <ScrollableTab />} initialPage={0}>
           <Tab heading="Details">
             <ScrollView>
               <View style={myStyles.addRecipeContainer}>
@@ -253,6 +214,7 @@ class AddRecipePage extends Component {
               category={"Spice"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
           <Tab heading="Vegetables">
@@ -260,6 +222,7 @@ class AddRecipePage extends Component {
               category={"Vegetables"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
           <Tab heading="Colds">
@@ -267,6 +230,7 @@ class AddRecipePage extends Component {
               category={"Colds"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
           <Tab heading="Frozen">
@@ -274,6 +238,7 @@ class AddRecipePage extends Component {
               category={"Frozen"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
           <Tab heading="Dry">
@@ -281,6 +246,7 @@ class AddRecipePage extends Component {
               category={"Dry"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
           <Tab heading="Other">
@@ -288,6 +254,7 @@ class AddRecipePage extends Component {
               category={"Other"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              update={this.state.update}
             />
           </Tab>
         </Tabs>

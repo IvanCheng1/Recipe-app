@@ -32,3 +32,16 @@ export function handleCreateRecipes(recipe, recipeId) {
     return dispatch(createRecipes(recipe, recipeId));
   };
 }
+
+function deleteRecipes(recipeId) {
+  return {
+    type: REMOVE_RECIPES,
+    recipeId,
+  };
+}
+
+export function handleDeleteRecipes(recipeId) {
+  return (dispatch) => {
+    return dispatch(deleteRecipes(recipeId));
+  };
+}
