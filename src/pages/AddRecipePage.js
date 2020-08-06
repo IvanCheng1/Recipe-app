@@ -32,14 +32,10 @@ class AddRecipePage extends Component {
     this.setState((prev) => ({
       [category]: {
         ...prev[category],
-        [key]: [
-          {
-            item: input,
-            quantity: prev[category][key]
-              ? prev[category][key][0].quantity
-              : "",
-          },
-        ],
+        [key]: {
+          item: input,
+          quantity: prev[category][key] ? prev[category][key].quantity : "",
+        },
       },
     }));
   };
@@ -48,12 +44,10 @@ class AddRecipePage extends Component {
     this.setState((prev) => ({
       [category]: {
         ...prev[category],
-        [key]: [
-          {
-            quantity: input,
-            item: prev[category][key] ? prev[category][key][0].item : "",
-          },
-        ],
+        [key]: {
+          quantity: input,
+          item: prev[category][key] ? prev[category][key].item : "",
+        },
       },
     }));
   };
