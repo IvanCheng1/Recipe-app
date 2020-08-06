@@ -11,6 +11,17 @@ export default function recipes(state = {}, action) {
         ...state,
         ...action.recipes,
       };
+    case CREATE_RECIPES:
+      return {
+        ...state,
+        [action.recipeId]: {
+          title: action.recipe.title,
+          course: action.recipe.course,
+          ingredients: action.recipe.ingredients,
+          notes: action.recipe.notes,
+          image: action.recipe.image,
+        },
+      };
     default:
       return state;
   }

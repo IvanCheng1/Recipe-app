@@ -12,17 +12,11 @@ import {
 import { Container, Tab, Tabs, ScrollableTab, Header } from "native-base";
 import RecipeItemInput from "../components/RecipeItemInput";
 
-function mapStateToProps(
-  state,
-  { category, catInput, onChangeItem, onChangeQty, catInputName, addInput }
-) {
+function mapStateToProps(state, { category, onChangeItem, onChangeQty }) {
   return {
     category,
-    catInput,
     onChangeItem,
     onChangeQty,
-    addInput,
-    catInputName,
   };
 }
 
@@ -47,16 +41,8 @@ class TabRecipe extends Component {
   };
 
   render() {
-    const {
-      category,
-      // catInput,
-      // catInputName,
-      onChangeItem,
-      onChangeQty,
-      // addInput,
-    } = this.props;
-
-    // console.log(this.state)
+    const { category, onChangeItem, onChangeQty } = this.props;
+    const { input } = this.state;
 
     return (
       // <Tab heading={category}>
@@ -69,7 +55,7 @@ class TabRecipe extends Component {
             onChangeQty={onChangeQty}
           />
 
-          {this.state.input.map((value, index) => {
+          {input.map((value, index) => {
             return value;
           })}
         </View>
@@ -77,7 +63,7 @@ class TabRecipe extends Component {
           title="+"
           onPress={() =>
             this.addInput(
-              this.state.input.length + 1,
+              input.length + 1,
               category,
               onChangeItem,
               onChangeQty

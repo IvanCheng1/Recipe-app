@@ -10,8 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Container, Tab, Tabs, ScrollableTab, Header } from "native-base";
-import RecipeItemInput from "../components/RecipeItemInput";
 import TabRecipe from "../components/TabRecipe";
+import { handleCreateRecipes } from "../actions/recipes";
 
 function mapStateToProps(state) {
   return {};
@@ -23,9 +23,11 @@ class AddRecipePage extends Component {
     notes: "",
     course: "",
     Spice: {},
-    // spiceInput: [],
     Vegetables: {},
-    // vegInput: [],
+    Colds: {},
+    Frozen: {},
+    Dry: {},
+    Other: {},
   };
 
   onChangeItem = (input, key, category) => {
@@ -52,47 +54,103 @@ class AddRecipePage extends Component {
     }));
   };
 
-  addInput = (key, category, catInput) => {
-    let input = this.state[catInput];
+  onSubmit = () => {
+    // alert("Saving Recipe");
 
-    input.push(
-      <RecipeItemInput
-        key={key}
-        id={key}
-        category={category}
-        onChangeItem={this.onChangeItem}
-        onChangeQty={this.onChangeQty}
-      />
-    );
-    this.setState({ [catInput]: input });
+    // const recipeId = this.state.title.replace(/\s+/g, "");
+
+    const recipe = {
+      title: "Chicken Curry",
+      course: "main",
+      ingredients: {
+        Spices: [
+          {
+            item: "curry powder",
+            quantity: "222g",
+          },
+          {
+            item: "pepper",
+            quantity: "1 tbsp",
+          },
+        ],
+        Colds: [],
+        Vegetables: [
+          {
+            item: "cauliflower",
+            quantity: "222g",
+          },
+        ],
+        Frozen: [],
+        Dry: [
+          {
+            item: "rice",
+            quantity: "500g",
+          },
+          {
+            item: "cornflour",
+            quantity: "1 tbsp",
+          },
+        ],
+        Other: [],
+      },
+      notes: "Takes a lot of effort",
+      image:
+        "https://image.shutterstock.com/z/stock-photo-butter-chicken-curry-murgh-makhani-with-tender-chicken-breast-cream-butter-honey-610126394.jpg",
+    };
+
+    const recipeId = recipe.title.replace(/\s+/g, "");
+
+    // add recipe
+    this.props.dispatch(handleCreateRecipes(recipe, recipeId));
+
+    // set state
+    this.setState({
+      title: "",
+      notes: "",
+      course: "",
+      Spice: {},
+      Vegetables: {},
+      Colds: {},
+      Frozen: {},
+      Dry: {},
+      Other: {},
+    });
+
+    // go to home
+    this.props.navigation.navigate("Home");
+
+    // this.props.navigation.navigate("Recipe Page", {
+    //   id: recipeId,
+    //   name: recipe.title,
+    // });
   };
 
   render() {
     const { title, notes, course } = this.state;
-    console.log("------------------------\n", this.state);
+    // console.log("------------------------\n", this.state);
 
     return (
       <Container style={myStyles.container}>
         {/* <Header hasTabs /> */}
-        <Tabs>
+        <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="Details">
             <ScrollView>
               <View style={myStyles.addRecipeContainer}>
                 {/* <Text style={myStyles.title}>Title</Text> */}
                 <TextInput
-                  // value={input}
+                  value={this.state.title}
                   style={myStyles.input}
                   placeholder="Title"
                   onChangeText={(input) => this.setState({ title: input })}
                 />
                 <TextInput
-                  // value={input}
+                  value={this.state.course}
                   style={myStyles.input}
                   placeholder="Course"
                   onChangeText={(input) => this.setState({ course: input })}
                 />
                 <TextInput
-                  // value={input}
+                  value={this.state.notes}
                   style={myStyles.input}
                   placeholder="Notes"
                   onChangeText={(input) => this.setState({ notes: input })}
@@ -103,81 +161,54 @@ class AddRecipePage extends Component {
           <Tab heading="Spices">
             <TabRecipe
               category={"Spice"}
-              catInput={this.state.spiceInput}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
-              addInput={this.addInput}
-              catInputName={"spiceInput"}
             />
           </Tab>
-
-          {/* <Tab heading="Spices">
-            <ScrollView>
-              <View style={myStyles.addRecipeContainer}>
-                <RecipeItemInput
-                  id={0}
-                  category={"Spice"}
-                  onChangeItem={this.onChangeItem}
-                  onChangeQty={this.onChangeQty}
-                />
-
-                {this.state.spiceInput.map((value, index) => {
-                  return value;
-                })}
-              </View>
-              <Button
-                title="+"
-                onPress={() =>
-                  this.addInput(
-                    this.state.spiceInput.length + 1,
-                    "Spice",
-                    "spiceInput"
-                  )
-                }
-              />
-            </ScrollView>
-          </Tab> */}
-          {/* <Tab heading="Vegetables">
-            <ScrollView>
-              <View style={myStyles.addRecipeContainer}>
-                <RecipeItemInput
-                  id={0}
-                  category={"Vegetables"}
-                  onChangeItem={this.onChangeItem}
-                  onChangeQty={this.onChangeQty}
-                />
-
-                {this.state.vegInput.map((value, index) => {
-                  return value;
-                })}
-              </View>
-              <Button
-                title="+"
-                onPress={() =>
-                  this.addInput(
-                    this.state.vegInput.length + 1,
-                    "Vegetables",
-                    "vegInput"
-                  )
-                }
-              />
-            </ScrollView>
-          </Tab> */}
+          <Tab heading="Vegetables">
+            <TabRecipe
+              category={"Vegetables"}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+            />
+          </Tab>
+          <Tab heading="Colds">
+            <TabRecipe
+              category={"Colds"}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+            />
+          </Tab>
+          <Tab heading="Frozen">
+            <TabRecipe
+              category={"Frozen"}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+            />
+          </Tab>
+          <Tab heading="Dry">
+            <TabRecipe
+              category={"Dry"}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+            />
+          </Tab>
+          <Tab heading="Other">
+            <TabRecipe
+              category={"Other"}
+              onChangeItem={this.onChangeItem}
+              onChangeQty={this.onChangeQty}
+            />
+          </Tab>
         </Tabs>
-        <TouchableOpacity onPress={() => alert("yay")} title="Add Recipe" />
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
-          onPress={() =>
-            console.log(
-              "---------------------\n------ Submit ------\n",
-              this.state
-            )
-          }
+          onPress={() => this.onSubmit()}
           // disabled={
           //   title === "" || notes === "" || course === "" ? true : false
           // }
         >
-          <Text style={myStyles.btnText}>Submit</Text>
+          <Text style={myStyles.btnText}>Save Recipe</Text>
         </TouchableOpacity>
       </Container>
     );

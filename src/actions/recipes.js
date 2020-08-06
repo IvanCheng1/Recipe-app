@@ -18,3 +18,17 @@ export function handleReceiveRecipes() {
     });
   };
 }
+
+function createRecipes(recipe, recipeId) {
+  return {
+    type: CREATE_RECIPES,
+    recipe,
+    recipeId,
+  };
+}
+
+export function handleCreateRecipes(recipe, recipeId) {
+  return (dispatch) => {
+    return dispatch(createRecipes(recipe, recipeId));
+  };
+}

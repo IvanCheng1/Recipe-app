@@ -20,15 +20,19 @@ function mapStateToProps({ recipes }) {
 
 class Recipes extends Component {
   state = {
-    recipes: {},
+    // recipes: {},
     query: "",
   };
 
   componentDidMount() {
-    this.props.dispatch(handleReceiveRecipes()).then(() => {
-      const recipes = this.props.recipes;
-      this.setState({ recipes: this.props.recipes });
-    });
+    this.props.dispatch(handleReceiveRecipes())
+    // this.setState({ recipes: this.props.recipes });
+
+    // this.props.dispatch(handleReceiveRecipes()).then(() => {
+      // const recipes = this.props.recipes;
+      // console.log(recipes, "here")
+      // this.setState({ recipes: this.props.recipes });
+    // });
   }
 
   onChangeSearch = (query) => {
@@ -69,8 +73,14 @@ class Recipes extends Component {
   };
 
   renderItem = (item) => {
-    const { recipes } = this.state;
+    const { recipes } = this.props;
     const recipe = recipes[item];
+
+    if (!recipe) {
+      return (
+        <View></View>
+      )
+    }
 
     return (
       <TouchableOpacity onPress={() => this.navigateToRecipe(recipe, item)}>
@@ -93,7 +103,7 @@ class Recipes extends Component {
   };
 
   render() {
-    const { recipes } = this.state;
+    const { recipes } = this.props;
 
     return (
       <SafeAreaView style={myStyles.container}>
@@ -107,7 +117,7 @@ class Recipes extends Component {
           <FlatList
             style={myStyles.recipeList}
             data={Object.keys(recipes).sort()}
-            extraData={this.state.recipes}
+            // extraData={this.state.recipes}
             renderItem={({ item }) => this.renderItem(item)}
             numColumns={2}
             keyExtractor={(item) => item}
