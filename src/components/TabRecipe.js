@@ -27,15 +27,36 @@ function mapStateToProps(
 }
 
 class TabRecipe extends Component {
+  state = {
+    input: [],
+  };
+
+  addInput = (key, category, onChangeItem, onChangeQty) => {
+    let input = this.state.input;
+
+    input.push(
+      <RecipeItemInput
+        key={key}
+        id={key}
+        category={category}
+        onChangeItem={onChangeItem}
+        onChangeQty={onChangeQty}
+      />
+    );
+    this.setState({ input: input });
+  };
+
   render() {
     const {
       category,
-      catInput,
-      catInputName,
+      // catInput,
+      // catInputName,
       onChangeItem,
       onChangeQty,
-      addInput,
+      // addInput,
     } = this.props;
+
+    // console.log(this.state)
 
     return (
       // <Tab heading={category}>
@@ -48,13 +69,20 @@ class TabRecipe extends Component {
             onChangeQty={onChangeQty}
           />
 
-          {catInput.map((value, index) => {
+          {this.state.input.map((value, index) => {
             return value;
           })}
         </View>
         <Button
           title="+"
-          onPress={() => addInput(catInput.length + 1, category, catInputName)}
+          onPress={() =>
+            this.addInput(
+              this.state.input.length + 1,
+              category,
+              onChangeItem,
+              onChangeQty
+            )
+          }
         />
       </ScrollView>
       // </Tab>

@@ -5,14 +5,6 @@ export const recipes = {
     ingredients: {
       Spices: [
         {
-          item: 'curry powder',
-          quantity: "200g",
-        },
-        {
-          item: 'pepper',
-          quantity: "1 tbsp",
-        },
-        {
           item: 'rapeseed oil',
           quantity: "2 tbsp",
         },

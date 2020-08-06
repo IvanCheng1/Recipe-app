@@ -23,9 +23,9 @@ class AddRecipePage extends Component {
     notes: "",
     course: "",
     Spice: {},
-    spiceInput: [],
+    // spiceInput: [],
     Vegetables: {},
-    vegInput: [],
+    // vegInput: [],
   };
 
   onChangeItem = (input, key, category) => {
@@ -75,7 +75,7 @@ class AddRecipePage extends Component {
 
   render() {
     const { title, notes, course } = this.state;
-    // console.log("------------------------\n", this.state.Spice);
+    console.log("------------------------\n", this.state);
 
     return (
       <Container style={myStyles.container}>
@@ -108,7 +108,7 @@ class AddRecipePage extends Component {
           </Tab>
           <Tab heading="Spices">
             <TabRecipe
-              category={"Spices"}
+              category={"Spice"}
               catInput={this.state.spiceInput}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
@@ -143,7 +143,7 @@ class AddRecipePage extends Component {
               />
             </ScrollView>
           </Tab> */}
-          <Tab heading="Vegetables">
+          {/* <Tab heading="Vegetables">
             <ScrollView>
               <View style={myStyles.addRecipeContainer}>
                 <RecipeItemInput
@@ -168,16 +168,15 @@ class AddRecipePage extends Component {
                 }
               />
             </ScrollView>
-          </Tab>
+          </Tab> */}
         </Tabs>
         <TouchableOpacity onPress={() => alert("yay")} title="Add Recipe" />
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
           onPress={() =>
             console.log(
-              "---------------------\n",
-              this.state.Spice,
-              this.state.Vegetables
+              "---------------------\n------ Submit ------\n",
+              this.state
             )
           }
           // disabled={
