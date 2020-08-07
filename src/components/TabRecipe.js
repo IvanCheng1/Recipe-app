@@ -27,8 +27,8 @@ class TabRecipe extends Component {
 
     input.push(
       <RecipeItemInput
-        key={key}
-        id={key}
+        key={`${category}${key}`}
+        id={`${category}${key}`}
         category={category}
         onChangeItem={onChangeItem}
         onChangeQty={onChangeQty}
@@ -51,8 +51,8 @@ class TabRecipe extends Component {
       <ScrollView>
         <View style={myStyles.addRecipeContainer}>
           <RecipeItemInput
-            id={0}
-            key={0}
+            id={`${category}0`}
+            key={`${category}0`}
             category={category}
             onChangeItem={onChangeItem}
             onChangeQty={onChangeQty}

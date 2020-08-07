@@ -19,9 +19,12 @@ import {
 import { ReactiveList } from "@appbaseio/reactivesearch-native";
 import { capitaliseWord } from "../utils/helpers";
 import { ScrollView } from "react-native-gesture-handler";
+import { handleGetShopping } from "../actions/shoppingList";
 
-function mapStateToProps(state) {
-  return {};
+function mapStateToProps({ shoppingList }) {
+  return {
+    shoppingList,
+  };
 }
 
 class ShoppingListPage extends Component {
@@ -30,31 +33,12 @@ class ShoppingListPage extends Component {
   };
 
   componentDidMount() {
+    this.props.dispatch(handleGetShopping());
+
+    console.log(this.props, "shopping list? ------------------------\n\n\n\n")
     this.setState({
-      ingredients: {
-        Spices: {
-          Spices0: {
-            item: "curry powder",
-            quantity: "222g",
-          },
-          Spices1: {
-            item: "pepper",
-            quantity: "1 tbsp",
-          },
-          Spices2: {
-            item: "a",
-            quantity: "3",
-          },
-        },
-        Colds: {},
-        Vegetables: {
-          Vegetables0: {
-            item: "cauliflower",
-            quantity: "222g",
-          },
-        },
-      },
-    });
+      ingredients: this.props.shoppingList
+    })
   }
 
   toggleCheck = (category, itemId) => {

@@ -1,4 +1,4 @@
-import { getRecipes } from "../utils/api";
+import { getRecipes, addRecipe } from "../utils/api";
 
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
 export const CREATE_RECIPES = "CREATE_RECIPES";
@@ -29,7 +29,9 @@ function createRecipes(recipe, recipeId) {
 
 export function handleCreateRecipes(recipe, recipeId) {
   return (dispatch) => {
-    return dispatch(createRecipes(recipe, recipeId));
+    return addRecipe(recipe, recipeId).then(() => {
+      dispatch(createRecipes(recipe, recipeId));
+    });
   };
 }
 

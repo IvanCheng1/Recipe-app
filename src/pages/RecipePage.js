@@ -6,6 +6,7 @@ import RecipeShoppingList from "../components/RecipeShoppingList";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { capitaliseWord } from "../utils/helpers";
 import { handleDeleteRecipes } from "../actions/recipes";
+import { handleAddShopping } from "../actions/shoppingList";
 
 function mapStateToProps({ recipes }) {
   return {
@@ -14,10 +15,15 @@ function mapStateToProps({ recipes }) {
 }
 
 class RecipePage extends Component {
-  onSubmit = (id) => {
+  onDelete = (id) => {
     this.props.dispatch(handleDeleteRecipes(id));
     this.props.navigation.navigate("Home");
   };
+
+  onAddToShoppinglist = (recipe) => {
+    this.props.dispatch(handleAddShopping(recipe));
+    // console.log(recipe)
+  }
 
   render() {
     const { id } = this.props.route.params;
@@ -46,7 +52,7 @@ class RecipePage extends Component {
 
           <TouchableOpacity
             style={myStyles.btn}
-            onPress={() => alert("Add to Shopping List")}
+            onPress={() => this.onAddToShoppinglist(item.ingredients)}
           >
             <Text style={myStyles.btnText}>Add to Shopping List</Text>
           </TouchableOpacity>
@@ -58,7 +64,7 @@ class RecipePage extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[myStyles.btn, myStyles.btnDark]}
-            onPress={() => this.onSubmit(id)}
+            onPress={() => this.onDelete(id)}
           >
             <Text style={myStyles.btnText}>Delete Recipe</Text>
           </TouchableOpacity>

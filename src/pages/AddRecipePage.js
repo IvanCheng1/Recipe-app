@@ -114,23 +114,13 @@ class AddRecipePage extends Component {
     recipe.course = submitRecipe.course;
     recipe.notes = submitRecipe.notes;
     recipe.image = submitRecipe.image;
-    recipe.ingredients = {};
-
-    for (const [category, objs] of Object.entries(submitRecipe.ingredients)) {
-      // initialise list for each category
-      recipe.ingredients[category] = [];
-
-      for (const item of Object.values(objs)) {
-        recipe.ingredients[category].push(item);
-      }
-    }
+    recipe.ingredients = submitRecipe.ingredients;
 
     const recipeId = recipe.title.replace(/\s+/g, "");
 
     // set state
     this.setState({
       title: "",
-      notes: "",
       course: "",
       ingredients: {
         Spices: {},
@@ -151,16 +141,18 @@ class AddRecipePage extends Component {
     // go to home
     // this.props.navigation.navigate("Home");
 
-    // this.props.navigation.navigate("Recipe Page", {
-    //   id: recipeId,
-    //   name: recipe.title,
-    // });
+    this.props.navigation.navigate("Recipe Page", {
+      id: recipeId,
+      name: recipe.title,
+    });
   };
 
   render() {
     const { title, notes, course } = this.state;
     // console.log("------------------------\n", this.state);
     const { image } = this.state;
+
+    // console.log(this.state)
 
     if (this.state.update) {
       this.setState({
