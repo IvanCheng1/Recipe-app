@@ -20,18 +20,20 @@ function mapStateToProps({ recipes }) {
 
 class Recipes extends Component {
   state = {
-    // recipes: {},
+    recipes: {},
     query: "",
   };
 
   componentDidMount() {
-    this.props.dispatch(handleReceiveRecipes())
-    // this.setState({ recipes: this.props.recipes });
+    this.props.dispatch(handleReceiveRecipes());
+    this.setState({
+      recipes: this.props.recipes,
+    });
 
     // this.props.dispatch(handleReceiveRecipes()).then(() => {
-      // const recipes = this.props.recipes;
-      // console.log(recipes, "here")
-      // this.setState({ recipes: this.props.recipes });
+    // const recipes = this.props.recipes;
+    // console.log(recipes, "here")
+    // this.setState({ recipes: this.props.recipes });
     // });
   }
 
@@ -54,10 +56,10 @@ class Recipes extends Component {
         continue;
       } else {
         for (const list of Object.values(item.ingredients)) {
-          if (list.length === 0) {
+          if (Object.keys(list).length === 0) {
             continue;
           }
-          for (const ingredient of list) {
+          for (const ingredient of Object.values(list)) {
             if (ingredient.item.toLowerCase().includes(query.toLowerCase())) {
               filtered[key] = item;
               continue;
@@ -70,6 +72,8 @@ class Recipes extends Component {
     this.setState({
       recipes: filtered,
     });
+
+    console.log(this.state);
   };
 
   renderItem = (item) => {
@@ -77,9 +81,7 @@ class Recipes extends Component {
     const recipe = recipes[item];
 
     if (!recipe) {
-      return (
-        <View></View>
-      )
+      return <View></View>;
     }
 
     return (
@@ -103,7 +105,14 @@ class Recipes extends Component {
   };
 
   render() {
-    const { recipes } = this.props;
+    let recipes;
+    if (this.state.query !== "") {
+      recipes = this.state.recipes;
+    } else {
+      recipes = this.props.recipes;
+    }
+
+    // const { recipes } = this.props;
 
     return (
       <SafeAreaView style={myStyles.container}>

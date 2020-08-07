@@ -35,10 +35,14 @@ class ShoppingListPage extends Component {
   componentDidMount() {
     this.props.dispatch(handleGetShopping());
 
-    console.log(this.props, "shopping list? ------------------------\n\n\n\n")
+    // console.log(this.props, "shopping list? ------------------------\n\n\n\n")
     this.setState({
-      ingredients: this.props.shoppingList
+      ingredients: this.props.shoppingList,
+      other: this.props.shoppingList,
     })
+
+    console.log("just updated state", this.state)
+    // console.log("props are", this.props.shoppingList)
   }
 
   toggleCheck = (category, itemId) => {
