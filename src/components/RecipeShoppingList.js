@@ -18,14 +18,14 @@ class RecipeShoppingList extends Component {
     const items = [];
 
     for (const [category, list] of Object.entries(ingredients)) {
-      if (list.length === 0) {
+      if (Object.values(list).length === 0) {
         // category is empty
         continue;
       }
 
       items.push(<Text key={category} style={myStyles.recipeCatText}>{category}</Text>);
       
-      for (const item of list) {
+      for (const item of Object.values(list)) {
         items.push(
           <View key={item.item} style={myStyles.recipeItemGroup}>
             <Text style={myStyles.recipeItemQuan}>{item.quantity}</Text>
