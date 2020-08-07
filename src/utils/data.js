@@ -3,7 +3,7 @@ export const recipes = {
     title: "Edamame Bean Pasta",
     course: "main",
     ingredients: {
-      Spices: [
+      Spices: [ 
         {
           item: 'rapeseed oil',
           quantity: "2 tbsp",

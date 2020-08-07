@@ -10,6 +10,12 @@ export const myStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  containerNonCenter: {
+    flex: 1,
+    backgroundColor: "#fff",
+    // alignItems: "center",
+    justifyContent: "center",
+  },
   recipeList: {
     flex: 1,
     flexDirection: "row",
@@ -186,5 +192,33 @@ export const myStyles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  shoppingListSectionTitle: {
+    fontSize: 20,
+    lineHeight: 26,
+    color: "#f4511e",
+    fontWeight: "bold",
+    textAlign: "left",
+    margin: 10,
+  },
+  shoppingListItem: {
+    // borderColor: "#f4511e",
+    // borderWidth: 1,
+    // borderRadius: 10,
+    // width: windowWidth * 0.95,
+  },
+  checkBox: {
+    marginRight: 15,
+  },
+  shoppingItemDescription: {
+    flex: 1,
+  },
+  shoppingItemDescriptionCrossed: {
+    textDecorationLine: 'line-through',
+    color: "grey",
+  },
+  shoppingListBin: {
+    marginLeft: 10,
+    marginRight: 10,
   }
 });

@@ -27,7 +27,7 @@ class AddRecipePage extends Component {
     notes: "",
     course: "",
     ingredients: {
-      Spice: {},
+      Spices: {},
       Vegetables: {},
       Colds: {},
       Frozen: {},
@@ -133,7 +133,7 @@ class AddRecipePage extends Component {
       notes: "",
       course: "",
       ingredients: {
-        Spice: {},
+        Spices: {},
         Vegetables: {},
         Colds: {},
         Frozen: {},
@@ -211,7 +211,7 @@ class AddRecipePage extends Component {
           </Tab>
           <Tab heading="Spices">
             <TabRecipe
-              category={"Spice"}
+              category={"Spices"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
               update={this.state.update}
