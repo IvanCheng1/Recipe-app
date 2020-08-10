@@ -1,4 +1,4 @@
-import { getRecipes, addRecipe } from "../utils/api";
+import { getRecipesAsync, addRecipeAsync, deleteRecipeAsync } from "../utils/api";
 
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
 export const CREATE_RECIPES = "CREATE_RECIPES";
@@ -13,7 +13,7 @@ function receiveRecipes(recipes) {
 
 export function handleReceiveRecipes() {
   return (dispatch) => {
-    return getRecipes().then((recipes) => {
+    return getRecipesAsync().then((recipes) => {
       dispatch(receiveRecipes(recipes));
     });
   };
@@ -29,7 +29,7 @@ function createRecipes(recipe, recipeId) {
 
 export function handleCreateRecipes(recipe, recipeId) {
   return (dispatch) => {
-    return addRecipe(recipe, recipeId).then(() => {
+    return addRecipeAsync(recipe, recipeId).then(() => {
       dispatch(createRecipes(recipe, recipeId));
     });
   };
@@ -44,6 +44,8 @@ function deleteRecipes(recipeId) {
 
 export function handleDeleteRecipes(recipeId) {
   return (dispatch) => {
-    return dispatch(deleteRecipes(recipeId));
+    return deleteRecipeAsync(recipeId).then(() => {
+      dispatch(deleteRecipes(recipeId));
+    });
   };
 }

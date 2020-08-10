@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 const RECIPE_STORAGE_KEY = "RECIPE_STORAGE_KEY";
 const SHOPPING_LIST_STORAGE_KEY = "SHOPPING_LIST_STORAGE_KEY";
 
-export const getRecipes = async () => {
+export const getRecipesAsync = async () => {
   try {
     // await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
 
@@ -23,7 +23,7 @@ export const getRecipes = async () => {
   }
 };
 
-export const addRecipe = async (recipe, recipeId) => {
+export const addRecipeAsync = async (recipe, recipeId) => {
   try {
     const item = JSON.stringify({
       [recipeId]: {
@@ -37,7 +37,19 @@ export const addRecipe = async (recipe, recipeId) => {
   }
 };
 
-export const addShoppingList = async (list) => {
+export const deleteRecipeAsync = async (recipeId) => {
+  try {
+    const localStorage = await AsyncStorage.getItem(RECIPE_STORAGE_KEY);
+    const recipes = JSON.parse(localStorage);
+
+    delete recipes[recipeId];
+    await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const addShoppingListAsync = async (list) => {
   try {
     await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(list));
 
@@ -47,7 +59,7 @@ export const addShoppingList = async (list) => {
   }
 };
 
-export const getShoppingList = async () => {
+export const getShoppingListAsync = async () => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
 
@@ -60,27 +72,3 @@ export const getShoppingList = async () => {
     console.log(e);
   }
 };
-
-// const ingredients = {
-//   Spices: {
-//     Spices0: {
-//       item: "curry powder",
-//       quantity: "222g",
-//     },
-//     Spices1: {
-//       item: "pepper",
-//       quantity: "1 tbsp",
-//     },
-//     Spices2: {
-//       item: "a",
-//       quantity: "3",
-//     },
-//   },
-//   Colds: {},
-//   Vegetables: {
-//     Vegetables0: {
-//       item: "cauliflower",
-//       quantity: "222g",
-//     },
-//   },
-// };
