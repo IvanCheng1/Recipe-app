@@ -23,15 +23,24 @@ class RecipeShoppingList extends Component {
         continue;
       }
 
-      items.push(<Text key={category} style={myStyles.recipeCatText}>{category}</Text>);
-      
+      items.push(
+        <Text key={category} style={myStyles.recipeCatText}>
+          {category}
+        </Text>
+      );
+
       for (const item of Object.values(list)) {
         items.push(
           <View key={item.item} style={myStyles.recipeItemGroup}>
             <Text style={myStyles.recipeItemQuan}>{item.quantity}</Text>
+            {item.unit ? (
+              <Text style={myStyles.recipeItemUnit}>{item.unit}</Text>
+            ) : (
+              <View></View>
+            )}
             <Text style={myStyles.recipeItem}>{capitaliseWord(item.item)}</Text>
           </View>
-        )
+        );
       }
     }
 

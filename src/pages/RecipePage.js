@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myStyles } from "../utils/myStyles";
-import { Text, View, Image, ScrollView } from "react-native";
+import { Text, View, Image, ScrollView, Alert } from "react-native";
 import RecipeShoppingList from "../components/RecipeShoppingList";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { capitaliseWord } from "../utils/helpers";
 import { handleDeleteRecipes } from "../actions/recipes";
 import { handleAddShopping } from "../actions/shoppingList";
+import Toast from "react-native-tiny-toast";
 
 function mapStateToProps({ recipes }) {
   return {
@@ -15,6 +16,24 @@ function mapStateToProps({ recipes }) {
 }
 
 class RecipePage extends Component {
+  confirmDelete = (id) => {
+    Alert.alert(
+      "Delete Recipe",
+      "Are you sure you want to remove this recipe?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Ok",
+          onPress: () => this.onDelete(id),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   onDelete = (id) => {
     this.props.dispatch(handleDeleteRecipes(id));
     this.props.navigation.navigate("Home");
@@ -22,8 +41,8 @@ class RecipePage extends Component {
 
   onAddToShoppinglist = (recipe) => {
     this.props.dispatch(handleAddShopping(recipe));
-    // console.log(recipe)
-  }
+    Toast.showSuccess("Added to Shopping List!");
+  };
 
   render() {
     const { id } = this.props.route.params;
@@ -31,7 +50,7 @@ class RecipePage extends Component {
     const item = recipes[id];
 
     if (!item) {
-      return <View></View>
+      return <View></View>;
     }
 
     const image = item.image
@@ -64,7 +83,7 @@ class RecipePage extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[myStyles.btn, myStyles.btnDark]}
-            onPress={() => this.onDelete(id)}
+            onPress={() => this.confirmDelete(id)}
           >
             <Text style={myStyles.btnText}>Delete Recipe</Text>
           </TouchableOpacity>

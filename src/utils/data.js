@@ -4,60 +4,72 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        Spices0: {
+        RapeseedOil: {
           item: "rapeseed oil",
-          quantity: "2 tbsp",
+          quantity: 2,
+          unit: "tbsp",
         },
-        Spices1: {
+        PeanutButter: {
           item: "peanut butter",
-          quantity: "6 tbsp",
+          quantity: 6,
+          unit: "tbsp",
         },
-        Spices2: {
+        SoySauce: {
           item: "soy sauce",
-          quantity: "1 tbsp",
+          quantity: 1,
+          unit: "tbsp",
         },
-        Spices3: {
+        VegStockCube: {
           item: "veg stock cube",
-          quantity: "1",
+          quantity: 1,
+          unit: "",
         },
       },
       Colds: {},
       Vegetables: {
-        Vegetables0: {
+        Tomatoes: {
           item: "tomatoes",
-          quantity: "6",
+          quantity: 6,
+          unit: "",
         },
-        Vegetables1: {
+        Onions: {
           item: "onions",
-          quantity: "2",
+          quantity: 2,
+          unit: "",
         },
-        Vegetables2: {
+        Garlic: {
           item: "garlic",
-          quantity: "2 cloves",
+          quantity: 2,
+          unit: "cloves",
         },
-        Vegetables3: {
+        RedChilli: {
           item: "red chilli",
-          quantity: "1",
+          quantity: 1,
+          unit: "",
         },
-        Vegetables4: {
+        SpringOnions: {
           item: "spring onions",
-          quantity: "bunch",
+          quantity: 1,
+          unit: "bunch",
         },
       },
       Frozen: {
-        Frozen0: {
+        EdemameBeans: {
           item: "edamame beans",
-          quantity: "3 mugs",
+          quantity: 3,
+          unit: "mugs",
         },
       },
       Dry: {
-        Dry0: {
+        Pasta: {
           item: "pasta",
-          quantity: "500g",
+          quantity: 500,
+          unit: "grams",
         },
-        Dry1: {
+        Cornflour: {
           item: "cornflour",
-          quantity: "1 tbsp",
+          quantity: 1,
+          unit: "tbsp",
         },
       },
       Other: {},
@@ -71,31 +83,37 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        Spices0: {
+        CurryPowder: {
           item: "curry powder",
-          quantity: "222g",
+          quantity: 20,
+          unit: "grams",
         },
-        Spices1: {
+        Pepper: {
           item: "pepper",
-          quantity: "1 tbsp",
+          quantity: 1,
+          unit: "tbsp",
+
         },
       },
       Colds: {},
       Vegetables: {
-        Vegetables0: {
+        Cauliflower: {
           item: "cauliflower",
-          quantity: "222g",
+          quantity: 1,
+          unit: "",
         },
       },
       Frozen: {},
       Dry: {
-        Dry0: {
+        Rice: {
           item: "rice",
-          quantity: "500g",
+          quantity: 500,
+          unit: "grams",
         },
-        Dry1: {
+        Cornflour: {
           item: "cornflour",
-          quantity: "1 tbsp",
+          quantity: 1,
+          unit: "tbsp",
         },
       },
       Other: {},
@@ -109,27 +127,31 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        Spices0: {
+        Pepper: {
           item: "pepper",
-          quantity: "1 tbsp",
+          quantity: 1,
+          unit: "tbsp",
         },
       },
       Colds: {},
       Vegetables: {
-        Vegetables0: {
+        Carrots: {
           item: "carrots",
-          quantity: "2",
+          quantity: 2,
+          unit: "",
         },
       },
       Frozen: {},
       Dry: {
-        Dry0: {
+        ChoppedTomatoes: {
           item: "chopped tomatoes",
-          quantity: "1",
+          quantity: 1,
+          unit: "",
         },
-        Dry1: {
+        Passata: {
           item: "passata",
-          quantity: "1",
+          quantity: 1,
+          unit: "",
         },
       },
       Other: {},

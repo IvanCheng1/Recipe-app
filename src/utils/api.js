@@ -47,11 +47,37 @@ export const deleteRecipeAsync = async (recipeId) => {
   }
 };
 
-export const addShoppingListAsync = async (list) => {
+export const addShoppingListAsync = async (shoppingList) => {
   try {
-    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(list));
+    const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
+    const prev = JSON.parse(localStorage);
 
-    return list;
+    let toSave = {
+      ...prev,
+    };
+
+    for (const [category, list] of Object.entries(shoppingList)) {
+      // toSave[category] = []
+      for (const [itemId, item] of Object.entries(list)) {
+        if (toSave[category][itemId]) {
+          // basic adding prev quantity to new quantity
+          toSave[category][itemId].quantity =
+            toSave[category][itemId].quantity + item.quantity;
+
+          // set item to be unchecked on shopping list
+          toSave[category][itemId].checked = false;
+        } else {
+          toSave[category][itemId] = item;
+        }
+      }
+    }
+
+    await AsyncStorage.setItem(
+      SHOPPING_LIST_STORAGE_KEY,
+      JSON.stringify(toSave)
+    );
+
+    return toSave;
   } catch (e) {
     console.log(e);
   }
@@ -91,9 +117,11 @@ export const toggleCheckShoppingListAsync = async (category, itemId) => {
     };
 
     // console.log(updated, "<--- updated shopping list");
-    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(updated));
-    return updated
-
+    await AsyncStorage.setItem(
+      SHOPPING_LIST_STORAGE_KEY,
+      JSON.stringify(updated)
+    );
+    return updated;
   } catch (e) {
     console.log(e);
   }
@@ -105,12 +133,14 @@ export const deleteShoppingListItemAsync = async (category, itemId) => {
     let shoppingList = JSON.parse(localStorage);
     // console.log(prev, "<--- before shopping list");
 
-    delete shoppingList[category][itemId]
+    delete shoppingList[category][itemId];
 
     // console.log(updated, "<--- updated shopping list");
-    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(shoppingList));
+    await AsyncStorage.setItem(
+      SHOPPING_LIST_STORAGE_KEY,
+      JSON.stringify(shoppingList)
+    );
     // return shoppingList
-
   } catch (e) {
     console.log(e);
   }

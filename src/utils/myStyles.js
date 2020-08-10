@@ -107,6 +107,14 @@ export const myStyles = StyleSheet.create({
     marginLeft: 4,
     // width: 50
   },
+  recipeItemUnit: {
+    fontSize: 16,
+    lineHeight: 25,
+    textAlign: "left",
+    marginRight: 5,
+    // marginLeft: 4,
+    // width: 50
+  },
   recipeItem: {
     fontSize: 16,
     lineHeight: 25,
