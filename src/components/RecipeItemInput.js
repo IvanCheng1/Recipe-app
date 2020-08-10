@@ -25,12 +25,7 @@ class RecipeItemInput extends Component {
   };
 
   render() {
-    const { id, category, onChangeItem, onChangeQty, onChangeUnit, update } = this.props;
-
-    // if (update) {
-    //   this.textInputValue.clear();
-    //   this.textInputQty.clear();
-    // }
+    const { id, category, onChangeItem, onChangeQty, onChangeUnit } = this.props;
 
     return (
       <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>

@@ -40,14 +40,8 @@ class TabRecipe extends Component {
   };
 
   render() {
-    const { category, onChangeItem, onChangeQty, onChangeUnit, update } = this.props;
+    const { category, onChangeItem, onChangeQty, onChangeUnit } = this.props;
     const { input } = this.state;
-
-    if (update) {
-      this.setState({
-        input: [],
-      });
-    }
 
     return (
       <ScrollView>
@@ -59,7 +53,6 @@ class TabRecipe extends Component {
             onChangeItem={onChangeItem}
             onChangeQty={onChangeQty}
             onChangeUnit={onChangeUnit}
-            update={update}
           />
 
           {input.map((value) => {
@@ -69,7 +62,13 @@ class TabRecipe extends Component {
         <Button
           title="Add another row"
           onPress={() =>
-            this.addInput(input.length + 1, category, onChangeItem, onChangeQty, onChangeUnit)
+            this.addInput(
+              input.length + 1,
+              category,
+              onChangeItem,
+              onChangeQty,
+              onChangeUnit
+            )
           }
         />
       </ScrollView>

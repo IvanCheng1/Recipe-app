@@ -34,6 +34,14 @@ class AddRecipePage extends Component {
       Dry: {},
       Other: {},
     },
+    input: {
+      Spices: [],
+      Vegetables: [],
+      Colds: [],
+      Frozen: [],
+      Dry: [],
+      Other: [],
+    },
     image: null,
     update: false,
   };
@@ -54,9 +62,9 @@ class AddRecipePage extends Component {
               ? prev.ingredients[category][key].quantity
               : "",
             unit: prev.ingredients[category][key]
-            ? prev.ingredients[category][key].unit
-            : "",
-        },
+              ? prev.ingredients[category][key].unit
+              : "",
+          },
         },
       },
     }));
@@ -74,8 +82,8 @@ class AddRecipePage extends Component {
               ? prev.ingredients[category][key].item
               : "",
             unit: prev.ingredients[category][key]
-            ? prev.ingredients[category][key].unit
-            : "",
+              ? prev.ingredients[category][key].unit
+              : "",
           },
         },
       },
@@ -94,13 +102,15 @@ class AddRecipePage extends Component {
               ? prev.ingredients[category][key].item
               : "",
             quantity: prev.ingredients[category][key]
-            ? prev.ingredients[category][key].quantity
-            : "",
+              ? prev.ingredients[category][key].quantity
+              : "",
           },
         },
       },
     }));
   };
+
+  addInput = () => {};
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -156,34 +166,52 @@ class AddRecipePage extends Component {
         Dry: {},
         Other: {},
       },
+      input: {
+        Spices: [],
+        Vegetables: [],
+        Colds: [],
+        Frozen: [],
+        Dry: [],
+        Other: [],
+      },
       notes: "",
       image: null,
-      update: true,
     });
 
     // add recipe
     this.props.dispatch(handleCreateRecipes(recipe, recipeId));
 
-    // go to home
-    // this.props.navigation.navigate("Home");
-
-    this.props.navigation.navigate("Recipe Page", {
-      id: recipeId,
-      name: recipe.title,
-    });
+    // this.props.navigation.navigate("Recipe Page", {
+    //   id: recipeId,
+    //   name: recipe.title,
+    // });
   };
 
   render() {
     const { title, notes, course } = this.state;
     // console.log("------------------------\n", this.state);
     const { image } = this.state;
+    const defaultCategories = [
+      "Spices",
+      "Vegetables",
+      "Colds",
+      "Frozen",
+      "Dry",
+      "Other",
+    ];
+    const renderTabs = [];
 
-    // console.log(this.state)
-
-    if (this.state.update) {
-      this.setState({
-        update: false,
-      });
+    for (const category of defaultCategories) {
+      renderTabs.push(
+        <Tab heading={category} key={category}>
+          <TabRecipe
+            category={category}
+            onChangeItem={this.onChangeItem}
+            onChangeQty={this.onChangeQty}
+            onChangeUnit={this.onChangeUnit}
+          />
+        </Tab>
+      );
     }
 
     return (
@@ -227,60 +255,7 @@ class AddRecipePage extends Component {
               </View>
             </ScrollView>
           </Tab>
-          <Tab heading="Spices">
-            <TabRecipe
-              category={"Spices"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
-          <Tab heading="Vegetables">
-            <TabRecipe
-              category={"Vegetables"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
-          <Tab heading="Colds">
-            <TabRecipe
-              category={"Colds"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
-          <Tab heading="Frozen">
-            <TabRecipe
-              category={"Frozen"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
-          <Tab heading="Dry">
-            <TabRecipe
-              category={"Dry"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
-          <Tab heading="Other">
-            <TabRecipe
-              category={"Other"}
-              onChangeItem={this.onChangeItem}
-              onChangeQty={this.onChangeQty}
-              onChangeUnit={this.onChangeUnit}
-              update={this.state.update}
-            />
-          </Tab>
+          {renderTabs}
         </Tabs>
         <TouchableOpacity
           style={[myStyles.btn, myStyles.btnDark]}
