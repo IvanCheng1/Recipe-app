@@ -19,7 +19,11 @@ import {
 import { ReactiveList } from "@appbaseio/reactivesearch-native";
 import { capitaliseWord } from "../utils/helpers";
 import { ScrollView } from "react-native-gesture-handler";
-import { handleGetShopping, handleToggleCheckShopping } from "../actions/shoppingList";
+import {
+  handleGetShopping,
+  handleToggleCheckShopping,
+  handleDeleteShoppingListItem,
+} from "../actions/shoppingList";
 import { toggleCheckShoppingListAsync } from "../utils/api";
 
 function mapStateToProps({ shoppingList }) {
@@ -29,60 +33,32 @@ function mapStateToProps({ shoppingList }) {
 }
 
 class ShoppingListPage extends Component {
-  state = {
-    ingredients: {},
-  };
+  // state = {
+  //   ingredients: {},
+  // };
 
   componentDidMount() {
     this.props.dispatch(handleGetShopping());
-
-    // console.log(this.props, "shopping list? ------------------------\n\n\n\n")
-    this.setState({
-      ingredients: this.props.shoppingList,
-      other: this.props.shoppingList,
-    })
-
-    // console.log("just updated state", this.state)
-    // console.log("props are", this.props.shoppingList)
+    // console.log(Object.values(this.props.shoppingList.Vegetables).length)
   }
 
   toggleCheck = (category, itemId) => {
-
-    this.props.dispatch(handleToggleCheckShopping(category, itemId))
-
-    // toggleCheckShoppingListAsync(category, itemId)
-    // this.setState((prev) => ({
-    //   ingredients: {
-    //     ...prev.ingredients,
-    //     [category]: {
-    //       ...prev.ingredients[category],
-    //       [itemId]: {
-    //         ...prev.ingredients[category][itemId],
-    //         checked: prev.ingredients[category][itemId].checked
-    //           ? !prev.ingredients[category][itemId].checked
-    //           : true,
-    //       },
-    //     },
-    //   },
-    // }));
+    this.props.dispatch(handleToggleCheckShopping(category, itemId));
   };
 
   onDelete = (category, itemId) => {
-    let prevStateIngredients = this.state.ingredients;
-    delete prevStateIngredients[category][itemId];
-
-    this.setState({
-      ingredients: prevStateIngredients,
-    });
+    this.props.dispatch(handleDeleteShoppingListItem(category, itemId));
   };
 
+  onClickAddItem = () => {
+    alert("feature coming");
+  };
+
+  addItem = () => {};
+
   render() {
-    // const { ingredients } = this.state;
-    const ingredients = this.props.shoppingList
-
+    const ingredients = this.props.shoppingList;
     let shoppingList = [];
-
-    // console.log(ingredients)
 
     for (const [category, list] of Object.entries(ingredients).sort()) {
       if (Object.keys(list).length === 0) {
@@ -138,15 +114,22 @@ class ShoppingListPage extends Component {
 
     return (
       <View style={myStyles.containerNonCenter}>
-        <ScrollView>
-          <View>{shoppingList}</View>
-        </ScrollView>
+        {shoppingList.length === 0 ? (
+          <View style={myStyles.container}>
+            <Text>Shopping List is Empty!</Text>
+            <Text>Go and add items from the recipe page.</Text>
+          </View>
+        ) : (
+          <ScrollView>
+            <View>{shoppingList}</View>
+          </ScrollView>
+        )}
         <Fab
           direction="up"
           containerStyle={{}}
           style={{ backgroundColor: "#f4511e" }}
           position="bottomRight"
-          onPress={() => alert("Feature coming")}
+          onPress={() => this.onClickAddItem()}
         >
           <Icon name="add" />
         </Fab>

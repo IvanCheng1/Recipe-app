@@ -1,4 +1,9 @@
-import { ADD_SHOPPING_LIST, GET_SHOPPING_LIST, TOGGLE_SHOPPING_LIST } from "../actions/shoppingList";
+import {
+  ADD_SHOPPING_LIST,
+  GET_SHOPPING_LIST,
+  TOGGLE_SHOPPING_LIST,
+  REMOVE_SHOPPING_LIST_ITEM,
+} from "../actions/shoppingList";
 
 export default function shoppingList(state = {}, action) {
   switch (action.type) {
@@ -15,10 +20,15 @@ export default function shoppingList(state = {}, action) {
         ...action.list,
       };
     case TOGGLE_SHOPPING_LIST:
-      console.log(action)
+      // console.log(action)
       return {
         ...state,
         ...action.list,
+      };
+    case REMOVE_SHOPPING_LIST_ITEM:
+      delete state[action.category][action.itemId];
+      return {
+        ...state,
       }
     default:
       return state;

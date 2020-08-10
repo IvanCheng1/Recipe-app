@@ -98,3 +98,20 @@ export const toggleCheckShoppingListAsync = async (category, itemId) => {
     console.log(e);
   }
 };
+
+export const deleteShoppingListItemAsync = async (category, itemId) => {
+  try {
+    const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
+    let shoppingList = JSON.parse(localStorage);
+    // console.log(prev, "<--- before shopping list");
+
+    delete shoppingList[category][itemId]
+
+    // console.log(updated, "<--- updated shopping list");
+    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(shoppingList));
+    // return shoppingList
+
+  } catch (e) {
+    console.log(e);
+  }
+};
