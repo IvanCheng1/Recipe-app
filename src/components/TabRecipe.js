@@ -7,12 +7,13 @@ import RecipeItemInput from "../components/RecipeItemInput";
 
 function mapStateToProps(
   state,
-  { category, onChangeItem, onChangeQty, update }
+  { category, onChangeItem, onChangeQty, onChangeUnit, update }
 ) {
   return {
     category,
     onChangeItem,
     onChangeQty,
+    onChangeUnit,
     update,
   };
 }
@@ -22,7 +23,7 @@ class TabRecipe extends Component {
     input: [],
   };
 
-  addInput = (key, category, onChangeItem, onChangeQty) => {
+  addInput = (key, category, onChangeItem, onChangeQty, onChangeUnit) => {
     let input = this.state.input;
 
     input.push(
@@ -32,13 +33,14 @@ class TabRecipe extends Component {
         category={category}
         onChangeItem={onChangeItem}
         onChangeQty={onChangeQty}
+        onChangeUnit={onChangeUnit}
       />
     );
     this.setState({ input: input });
   };
 
   render() {
-    const { category, onChangeItem, onChangeQty, update } = this.props;
+    const { category, onChangeItem, onChangeQty, onChangeUnit, update } = this.props;
     const { input } = this.state;
 
     if (update) {
@@ -56,6 +58,7 @@ class TabRecipe extends Component {
             category={category}
             onChangeItem={onChangeItem}
             onChangeQty={onChangeQty}
+            onChangeUnit={onChangeUnit}
             update={update}
           />
 
@@ -66,7 +69,7 @@ class TabRecipe extends Component {
         <Button
           title="Add another row"
           onPress={() =>
-            this.addInput(input.length + 1, category, onChangeItem, onChangeQty)
+            this.addInput(input.length + 1, category, onChangeItem, onChangeQty, onChangeUnit)
           }
         />
       </ScrollView>

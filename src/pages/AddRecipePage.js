@@ -53,7 +53,10 @@ class AddRecipePage extends Component {
             quantity: prev.ingredients[category][key]
               ? prev.ingredients[category][key].quantity
               : "",
-          },
+            unit: prev.ingredients[category][key]
+            ? prev.ingredients[category][key].unit
+            : "",
+        },
         },
       },
     }));
@@ -70,6 +73,29 @@ class AddRecipePage extends Component {
             item: prev.ingredients[category][key]
               ? prev.ingredients[category][key].item
               : "",
+            unit: prev.ingredients[category][key]
+            ? prev.ingredients[category][key].unit
+            : "",
+          },
+        },
+      },
+    }));
+  };
+
+  onChangeUnit = (input, key, category) => {
+    this.setState((prev) => ({
+      ingredients: {
+        ...prev.ingredients,
+        [category]: {
+          ...prev.ingredients[category],
+          [key]: {
+            unit: input,
+            item: prev.ingredients[category][key]
+              ? prev.ingredients[category][key].item
+              : "",
+            quantity: prev.ingredients[category][key]
+            ? prev.ingredients[category][key].quantity
+            : "",
           },
         },
       },
@@ -206,6 +232,7 @@ class AddRecipePage extends Component {
               category={"Spices"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>
@@ -214,6 +241,7 @@ class AddRecipePage extends Component {
               category={"Vegetables"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>
@@ -222,6 +250,7 @@ class AddRecipePage extends Component {
               category={"Colds"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>
@@ -230,6 +259,7 @@ class AddRecipePage extends Component {
               category={"Frozen"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>
@@ -238,6 +268,7 @@ class AddRecipePage extends Component {
               category={"Dry"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>
@@ -246,6 +277,7 @@ class AddRecipePage extends Component {
               category={"Other"}
               onChangeItem={this.onChangeItem}
               onChangeQty={this.onChangeQty}
+              onChangeUnit={this.onChangeUnit}
               update={this.state.update}
             />
           </Tab>

@@ -5,13 +5,14 @@ import { Text, View, TextInput } from "react-native";
 
 function mapStateToProps(
   state,
-  { id, category, onChangeItem, onChangeQty, update }
+  { id, category, onChangeItem, onChangeQty, onChangeUnit, update }
 ) {
   return {
     id,
     category,
     onChangeItem,
     onChangeQty,
+    onChangeUnit,
     update,
   };
 }
@@ -20,15 +21,16 @@ class RecipeItemInput extends Component {
   state = {
     item: "",
     quantity: "",
+    unit: "",
   };
 
   render() {
-    const { id, category, onChangeItem, onChangeQty, update } = this.props;
+    const { id, category, onChangeItem, onChangeQty, onChangeUnit, update } = this.props;
 
-    if (update) {
-      this.textInputValue.clear();
-      this.textInputQty.clear();
-    }
+    // if (update) {
+    //   this.textInputValue.clear();
+    //   this.textInputQty.clear();
+    // }
 
     return (
       <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
@@ -36,17 +38,25 @@ class RecipeItemInput extends Component {
           style={myStyles.inputItemLeft}
           placeholder="Item..."
           onChangeText={(input) => onChangeItem(input, id, category)}
-          ref={(input) => {
-            this.textInputValue = input;
-          }}
+          // ref={(input) => {
+          //   this.textInputValue = input;
+          // }}
         />
         <TextInput
           style={myStyles.inputQuantityRight}
           placeholder="Qty"
           onChangeText={(input) => onChangeQty(input, id, category)}
-          ref={(input) => {
-            this.textInputQty = input;
-          }}
+          // ref={(input) => {
+          //   this.textInputQty = input;
+          // }}
+        />
+        <TextInput
+          style={myStyles.inputQuantityRight}
+          placeholder="Unit"
+          onChangeText={(input) => onChangeUnit(input, id, category)}
+          // ref={(input) => {
+          //   this.textInputQty = input;
+          // }}
         />
       </View>
     );
