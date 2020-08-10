@@ -1,4 +1,4 @@
-import { ADD_SHOPPING_LIST, GET_SHOPPING_LIST } from "../actions/shoppingList";
+import { ADD_SHOPPING_LIST, GET_SHOPPING_LIST, TOGGLE_SHOPPING_LIST } from "../actions/shoppingList";
 
 export default function shoppingList(state = {}, action) {
   switch (action.type) {
@@ -14,6 +14,12 @@ export default function shoppingList(state = {}, action) {
         ...state,
         ...action.list,
       };
+    case TOGGLE_SHOPPING_LIST:
+      console.log(action)
+      return {
+        ...state,
+        ...action.list,
+      }
     default:
       return state;
   }

@@ -9,12 +9,10 @@ export const getRecipesAsync = async () => {
     // await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
 
     const localStorage = await AsyncStorage.getItem(RECIPE_STORAGE_KEY);
-    // console.log(JSON.parse(localStorage))
 
     if (localStorage) {
       return JSON.parse(localStorage);
     } else {
-      // const r = _getRecipes()
       await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
       return recipes;
     }
@@ -68,6 +66,34 @@ export const getShoppingListAsync = async () => {
     } else {
       return {};
     }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const toggleCheckShoppingListAsync = async (category, itemId) => {
+  try {
+    const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
+    let prev = JSON.parse(localStorage);
+    // console.log(prev, "<--- before shopping list");
+
+    const updated = {
+      ...prev,
+      [category]: {
+        ...prev[category],
+        [itemId]: {
+          ...prev[category][itemId],
+          checked: prev[category][itemId].checked
+            ? !prev[category][itemId].checked
+            : true,
+        },
+      },
+    };
+
+    // console.log(updated, "<--- updated shopping list");
+    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify(updated));
+    return updated
+
   } catch (e) {
     console.log(e);
   }

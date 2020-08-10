@@ -19,7 +19,8 @@ import {
 import { ReactiveList } from "@appbaseio/reactivesearch-native";
 import { capitaliseWord } from "../utils/helpers";
 import { ScrollView } from "react-native-gesture-handler";
-import { handleGetShopping } from "../actions/shoppingList";
+import { handleGetShopping, handleToggleCheckShopping } from "../actions/shoppingList";
+import { toggleCheckShoppingListAsync } from "../utils/api";
 
 function mapStateToProps({ shoppingList }) {
   return {
@@ -41,25 +42,29 @@ class ShoppingListPage extends Component {
       other: this.props.shoppingList,
     })
 
-    console.log("just updated state", this.state)
+    // console.log("just updated state", this.state)
     // console.log("props are", this.props.shoppingList)
   }
 
   toggleCheck = (category, itemId) => {
-    this.setState((prev) => ({
-      ingredients: {
-        ...prev.ingredients,
-        [category]: {
-          ...prev.ingredients[category],
-          [itemId]: {
-            ...prev.ingredients[category][itemId],
-            checked: prev.ingredients[category][itemId].checked
-              ? !prev.ingredients[category][itemId].checked
-              : true,
-          },
-        },
-      },
-    }));
+
+    this.props.dispatch(handleToggleCheckShopping(category, itemId))
+
+    // toggleCheckShoppingListAsync(category, itemId)
+    // this.setState((prev) => ({
+    //   ingredients: {
+    //     ...prev.ingredients,
+    //     [category]: {
+    //       ...prev.ingredients[category],
+    //       [itemId]: {
+    //         ...prev.ingredients[category][itemId],
+    //         checked: prev.ingredients[category][itemId].checked
+    //           ? !prev.ingredients[category][itemId].checked
+    //           : true,
+    //       },
+    //     },
+    //   },
+    // }));
   };
 
   onDelete = (category, itemId) => {
@@ -72,7 +77,8 @@ class ShoppingListPage extends Component {
   };
 
   render() {
-    const { ingredients } = this.state;
+    // const { ingredients } = this.state;
+    const ingredients = this.props.shoppingList
 
     let shoppingList = [];
 
