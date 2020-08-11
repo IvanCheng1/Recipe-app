@@ -16,6 +16,7 @@ import { handleCreateRecipes } from "../actions/recipes";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
+import RecipeItemInput from "../components/RecipeItemInput";
 
 function mapStateToProps(state) {
   return {};
@@ -110,7 +111,31 @@ class AddRecipePage extends Component {
     }));
   };
 
-  addInput = () => {};
+  addInput = (
+    key,
+    category,
+    inputFields,
+    onChangeItem,
+    onChangeQty,
+    onChangeUnit
+  ) => {
+    inputFields.push(
+      <RecipeItemInput
+        key={`${category}${key}`}
+        id={`${category}${key}`}
+        category={category}
+        onChangeItem={onChangeItem}
+        onChangeQty={onChangeQty}
+        onChangeUnit={onChangeUnit}
+      />
+    );
+    this.setState((prev) => ({
+      input: {
+        ...prev,
+        [category]: inputFields,
+      },
+    }));
+  };
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
