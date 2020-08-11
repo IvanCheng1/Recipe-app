@@ -6,7 +6,6 @@ import { Text, View, TouchableOpacity } from "react-native";
 // import CheckBox from "react-native-check-box";
 import { Feather } from "@expo/vector-icons";
 import { ListItem, CheckBox, Fab, Icon } from "native-base";
-import { ReactiveList } from "@appbaseio/reactivesearch-native";
 import { capitaliseWord } from "../utils/helpers";
 import { ScrollView } from "react-native-gesture-handler";
 import {
@@ -35,7 +34,8 @@ class ShoppingListPage extends Component {
   };
 
   onClickAddItem = () => {
-    alert("feature coming");
+    // alert("feature coming");
+    this.props.navigation.navigate("Add Item")
   };
 
   addItem = () => {};
@@ -82,7 +82,7 @@ class ShoppingListPage extends Component {
                   details.checked && myStyles.shoppingItemDescriptionCrossed
                 }
               >
-                {details.quantity} {capitaliseWord(details.item)}
+                {capitaliseWord(details.item)} - {details.quantity}
               </Text>
               {details.for && (
                 <Text

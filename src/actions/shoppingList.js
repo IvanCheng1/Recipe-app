@@ -1,9 +1,16 @@
-import { getShoppingListAsync, addShoppingListAsync, toggleCheckShoppingListAsync, deleteShoppingListItemAsync } from "../utils/api";
+import {
+  getShoppingListAsync,
+  addShoppingListAsync,
+  toggleCheckShoppingListAsync,
+  deleteShoppingListItemAsync,
+  addItemShoppingListAsync,
+} from "../utils/api";
 
 export const ADD_SHOPPING_LIST = "ADD_SHOPPING_LIST";
+export const ADD_ITEM_SHOPPING_LIST = "ADD_ITEM_SHOPPING_LIST";
 export const GET_SHOPPING_LIST = "GET_SHOPPING_LIST";
-export const TOGGLE_SHOPPING_LIST = "TOGGLE_SHOPPING_LIST"
-export const REMOVE_SHOPPING_LIST_ITEM = "REMOVE_SHOPPING_LIST_ITEM"
+export const TOGGLE_SHOPPING_LIST = "TOGGLE_SHOPPING_LIST";
+export const REMOVE_SHOPPING_LIST_ITEM = "REMOVE_SHOPPING_LIST_ITEM";
 
 function addShopping(list) {
   return {
@@ -15,6 +22,14 @@ function addShopping(list) {
 export function handleAddShopping(list, title) {
   return (dispatch) => {
     return addShoppingListAsync(list, title).then((list) => {
+      dispatch(addShopping(list));
+    });
+  };
+}
+
+export function handleAddItemShopping(item, quantity, category) {
+  return (dispatch) => {
+    return addItemShoppingListAsync(item, quantity, category).then((list) => {
       dispatch(addShopping(list));
     });
   };

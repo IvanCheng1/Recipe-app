@@ -132,6 +132,10 @@ export const myStyles = StyleSheet.create({
     width: 250,
     height: 50,
   },
+  btnDisabled: {
+    backgroundColor: "grey",
+    
+  },
   btnSmall: {
     backgroundColor: "#f56436",
     padding: 10,

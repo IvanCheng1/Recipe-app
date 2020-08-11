@@ -137,7 +137,6 @@ class AddRecipePage extends Component {
   };
 
   onSubmit = () => {
-    // alert("Saving Recipe");
     const submitRecipe = this.state;
 
     let recipe = {};
@@ -146,7 +145,7 @@ class AddRecipePage extends Component {
     recipe.notes = submitRecipe.notes;
     recipe.image = submitRecipe.image;
     recipe.ingredients = submitRecipe.ingredients;
-    // console.log(recipe)
+
     const recipeId = recipe.title.replace(/\s+/g, "");
 
     // set state
@@ -211,10 +210,6 @@ class AddRecipePage extends Component {
       );
     }
 
-    // console.log(this.state.input)
-
-    // console.log(this.state)
-
     return (
       <Container style={myStyles.container}>
         {/* <Header hasTabs /> */}
@@ -265,11 +260,17 @@ class AddRecipePage extends Component {
           {renderTabs}
         </Tabs>
         <TouchableOpacity
-          style={[myStyles.btn, myStyles.btnDark]}
+          style={[
+            myStyles.btn,
+            myStyles.btnDark,
+            title === "" || notes === "" || course === ""
+              ? myStyles.btnDisabled
+              : "",
+          ]}
           onPress={() => this.onSubmit()}
-          // disabled={
-          //   title === "" || notes === "" || course === "" ? true : false
-          // }
+          disabled={
+            title === "" || notes === "" || course === "" ? true : false
+          }
         >
           <Text style={myStyles.btnText}>Save Recipe</Text>
         </TouchableOpacity>

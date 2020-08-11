@@ -10,7 +10,7 @@ export const getRecipesAsync = async () => {
     // await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
 
     const localStorage = await AsyncStorage.getItem(RECIPE_STORAGE_KEY);
-    console.log(JSON.parse(localStorage));
+
     if (localStorage) {
       return JSON.parse(localStorage);
     } else {
@@ -95,9 +95,54 @@ export const addShoppingListAsync = async (shoppingList, title) => {
   }
 };
 
+export const addItemShoppingListAsync = async (item, quantity, category) => {
+  try {
+    const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
+    const prev = JSON.parse(localStorage);
+
+    const itemId = capitaliseWordAndRemoveSpace(item);
+
+    let toSave = {
+      ...prev,
+      [category]: {
+        ...prev[category],
+        [itemId]: {
+          checked: false,
+          item: item,
+          quantity: quantity,
+        },
+      },
+    };
+
+    console.log(toSave);
+    // console.log(item, quantity, category)
+
+    // for (const [category, list] of Object.entries(shoppingList)) {
+    //   if (!toSave[category]) {
+    //     toSave[category] = {};
+    //   }
+
+    //   for (const [itemId, item] of Object.entries(list)) {
+    //     toSave[category][itemId] = item;
+    //     toSave[category][itemId].checked = false;
+    //     toSave[category][itemId].for = title;
+    //   }
+    // }
+
+    await AsyncStorage.setItem(
+      SHOPPING_LIST_STORAGE_KEY,
+      JSON.stringify(toSave)
+    );
+
+    return toSave;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const getShoppingListAsync = async () => {
   try {
-    // await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, {});
+    // await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify({}));
 
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
 
