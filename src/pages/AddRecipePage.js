@@ -9,6 +9,7 @@ import {
   Button,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Container, Tab, Tabs, ScrollableTab, Header } from "native-base";
 import TabRecipe from "../components/TabRecipe";
@@ -17,6 +18,7 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import RecipeItemInput from "../components/RecipeItemInput";
+// import { Header } from 'react-navigation-stack';
 
 function mapStateToProps(state) {
   return {};
@@ -44,7 +46,6 @@ class AddRecipePage extends Component {
       Other: [],
     },
     image: null,
-    update: false,
   };
 
   componentDidMount() {
@@ -61,9 +62,6 @@ class AddRecipePage extends Component {
             item: input,
             quantity: prev.ingredients[category][key]
               ? prev.ingredients[category][key].quantity
-              : "",
-            unit: prev.ingredients[category][key]
-              ? prev.ingredients[category][key].unit
               : "",
           },
         },
@@ -82,57 +80,29 @@ class AddRecipePage extends Component {
             item: prev.ingredients[category][key]
               ? prev.ingredients[category][key].item
               : "",
-            unit: prev.ingredients[category][key]
-              ? prev.ingredients[category][key].unit
-              : "",
           },
         },
       },
     }));
   };
 
-  onChangeUnit = (input, key, category) => {
-    this.setState((prev) => ({
-      ingredients: {
-        ...prev.ingredients,
-        [category]: {
-          ...prev.ingredients[category],
-          [key]: {
-            unit: input,
-            item: prev.ingredients[category][key]
-              ? prev.ingredients[category][key].item
-              : "",
-            quantity: prev.ingredients[category][key]
-              ? prev.ingredients[category][key].quantity
-              : "",
-          },
-        },
-      },
-    }));
-  };
+  addInput = (key, category, onChangeItem, onChangeQty) => {
+    let currentInputs = this.state.input[category];
+    const ingredientId = `${category}${key}`;
 
-  addInput = (
-    key,
-    category,
-    inputFields,
-    onChangeItem,
-    onChangeQty,
-    onChangeUnit
-  ) => {
-    inputFields.push(
+    currentInputs.push(
       <RecipeItemInput
-        key={`${category}${key}`}
-        id={`${category}${key}`}
+        key={ingredientId}
+        id={ingredientId}
         category={category}
         onChangeItem={onChangeItem}
         onChangeQty={onChangeQty}
-        onChangeUnit={onChangeUnit}
       />
     );
     this.setState((prev) => ({
       input: {
-        ...prev,
-        [category]: inputFields,
+        ...prev.input,
+        [category]: currentInputs,
       },
     }));
   };
@@ -176,7 +146,7 @@ class AddRecipePage extends Component {
     recipe.notes = submitRecipe.notes;
     recipe.image = submitRecipe.image;
     recipe.ingredients = submitRecipe.ingredients;
-
+    // console.log(recipe)
     const recipeId = recipe.title.replace(/\s+/g, "");
 
     // set state
@@ -206,10 +176,10 @@ class AddRecipePage extends Component {
     // add recipe
     this.props.dispatch(handleCreateRecipes(recipe, recipeId));
 
-    // this.props.navigation.navigate("Recipe Page", {
-    //   id: recipeId,
-    //   name: recipe.title,
-    // });
+    this.props.navigation.navigate("Recipe Page", {
+      id: recipeId,
+      name: recipe.title,
+    });
   };
 
   render() {
@@ -233,11 +203,17 @@ class AddRecipePage extends Component {
             category={category}
             onChangeItem={this.onChangeItem}
             onChangeQty={this.onChangeQty}
-            onChangeUnit={this.onChangeUnit}
+            addInput={this.addInput}
+            input={this.state.input}
+            values={this.state.ingredients}
           />
         </Tab>
       );
     }
+
+    // console.log(this.state.input)
+
+    // console.log(this.state)
 
     return (
       <Container style={myStyles.container}>
@@ -245,39 +221,45 @@ class AddRecipePage extends Component {
         <Tabs renderTabBar={() => <ScrollableTab />} initialPage={0}>
           <Tab heading="Details">
             <ScrollView>
-              <View style={myStyles.addRecipeContainer}>
-                {/* <Text style={myStyles.title}>Title</Text> */}
-                <TouchableOpacity
-                  onPress={this.pickImage}
-                  style={{ marginBottom: 20 }}
-                >
-                  {image ? (
-                    <Image style={myStyles.img} source={{ uri: image }} />
-                  ) : (
-                    <View style={myStyles.imgPlaceHolder}>
-                      <Text>Choose Image</Text>
-                    </View>
-                  )}
-                </TouchableOpacity>
-                <TextInput
-                  value={this.state.title}
-                  style={myStyles.input}
-                  placeholder="Title"
-                  onChangeText={(input) => this.setState({ title: input })}
-                />
-                <TextInput
-                  value={this.state.course}
-                  style={myStyles.input}
-                  placeholder="Course"
-                  onChangeText={(input) => this.setState({ course: input })}
-                />
-                <TextInput
-                  value={this.state.notes}
-                  style={myStyles.input}
-                  placeholder="Notes"
-                  onChangeText={(input) => this.setState({ notes: input })}
-                />
-              </View>
+              <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "position" : "height"}
+                style={myStyles.container}
+                keyboardVerticalOffset={100}
+              >
+                <View style={myStyles.addRecipeContainer}>
+                  {/* <Text style={myStyles.title}>Title</Text> */}
+                  <TouchableOpacity
+                    onPress={this.pickImage}
+                    style={{ marginBottom: 20 }}
+                  >
+                    {image ? (
+                      <Image style={myStyles.img} source={{ uri: image }} />
+                    ) : (
+                      <View style={myStyles.imgPlaceHolder}>
+                        <Text>Choose Image</Text>
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                  <TextInput
+                    value={this.state.title}
+                    style={myStyles.input}
+                    placeholder="Title"
+                    onChangeText={(input) => this.setState({ title: input })}
+                  />
+                  <TextInput
+                    value={this.state.course}
+                    style={myStyles.input}
+                    placeholder="Course"
+                    onChangeText={(input) => this.setState({ course: input })}
+                  />
+                  <TextInput
+                    value={this.state.notes}
+                    style={myStyles.input}
+                    placeholder="Notes"
+                    onChangeText={(input) => this.setState({ notes: input })}
+                  />
+                </View>
+              </KeyboardAvoidingView>
             </ScrollView>
           </Tab>
           {renderTabs}

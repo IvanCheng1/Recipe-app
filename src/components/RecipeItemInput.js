@@ -5,15 +5,14 @@ import { Text, View, TextInput } from "react-native";
 
 function mapStateToProps(
   state,
-  { id, category, onChangeItem, onChangeQty, onChangeUnit, update }
+  { id, category, onChangeItem, onChangeQty, values }
 ) {
   return {
     id,
     category,
     onChangeItem,
     onChangeQty,
-    onChangeUnit,
-    update,
+    values,
   };
 }
 
@@ -21,40 +20,45 @@ class RecipeItemInput extends Component {
   state = {
     item: "",
     quantity: "",
-    unit: "",
   };
-
   render() {
-    const { id, category, onChangeItem, onChangeQty, onChangeUnit } = this.props;
+    const { id, category, onChangeItem, onChangeQty, values } = this.props;
 
-    return (
-      <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
-        <TextInput
-          style={myStyles.inputItemLeft}
-          placeholder="Item..."
-          onChangeText={(input) => onChangeItem(input, id, category)}
-          // ref={(input) => {
-          //   this.textInputValue = input;
-          // }}
-        />
-        <TextInput
-          style={myStyles.inputQuantityRight}
-          placeholder="Qty"
-          onChangeText={(input) => onChangeQty(input, id, category)}
-          // ref={(input) => {
-          //   this.textInputQty = input;
-          // }}
-        />
-        <TextInput
-          style={myStyles.inputQuantityRight}
-          placeholder="Unit"
-          onChangeText={(input) => onChangeUnit(input, id, category)}
-          // ref={(input) => {
-          //   this.textInputQty = input;
-          // }}
-        />
-      </View>
-    );
+    if (values) {
+      return (
+        <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+          <TextInput
+            style={myStyles.inputItemLeft}
+            placeholder="Item..."
+            onChangeText={(input) => onChangeItem(input, id, category)}
+            value={values ? values.item : ""}
+          />
+          <TextInput
+            style={myStyles.inputQuantityRight}
+            placeholder="Qty"
+            onChangeText={(input) => onChangeQty(input, id, category)}
+            value={values ? values.quantity : ""}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+          <TextInput
+            style={myStyles.inputItemLeft}
+            placeholder="Item..."
+            onChangeText={(input) => onChangeItem(input, id, category)}
+
+          />
+          <TextInput
+            style={myStyles.inputQuantityRight}
+            placeholder="Qty"
+            onChangeText={(input) => onChangeQty(input, id, category)}
+
+          />
+        </View>
+      );
+    }
   }
 }
 

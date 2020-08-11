@@ -12,6 +12,7 @@ export default function recipes(state = {}, action) {
         ...action.recipes,
       };
     case CREATE_RECIPES:
+      // console.log(action)
       return {
         ...state,
         [action.recipeId]: {

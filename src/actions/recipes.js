@@ -29,8 +29,8 @@ function createRecipes(recipe, recipeId) {
 
 export function handleCreateRecipes(recipe, recipeId) {
   return (dispatch) => {
-    return addRecipeAsync(recipe, recipeId).then(() => {
-      dispatch(createRecipes(recipe, recipeId));
+    return addRecipeAsync(recipe, recipeId).then((formattedRecipe) => {
+      dispatch(createRecipes(formattedRecipe, recipeId));
     });
   };
 }

@@ -5,17 +5,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 // import { CheckBox } from "react-native-elements";
 // import CheckBox from "react-native-check-box";
 import { Feather } from "@expo/vector-icons";
-
-import {
-  Container,
-  Header,
-  Content,
-  ListItem,
-  CheckBox,
-  Body,
-  Fab,
-  Icon,
-} from "native-base";
+import { ListItem, CheckBox, Fab, Icon } from "native-base";
 import { ReactiveList } from "@appbaseio/reactivesearch-native";
 import { capitaliseWord } from "../utils/helpers";
 import { ScrollView } from "react-native-gesture-handler";
@@ -24,7 +14,6 @@ import {
   handleToggleCheckShopping,
   handleDeleteShoppingListItem,
 } from "../actions/shoppingList";
-import { toggleCheckShoppingListAsync } from "../utils/api";
 
 function mapStateToProps({ shoppingList }) {
   return {
@@ -33,13 +22,8 @@ function mapStateToProps({ shoppingList }) {
 }
 
 class ShoppingListPage extends Component {
-  // state = {
-  //   ingredients: {},
-  // };
-
   componentDidMount() {
     this.props.dispatch(handleGetShopping());
-    // console.log(Object.values(this.props.shoppingList.Vegetables).length)
   }
 
   toggleCheck = (category, itemId) => {

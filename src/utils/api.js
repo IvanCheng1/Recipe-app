@@ -1,5 +1,6 @@
 import { recipes } from "./data";
 import { AsyncStorage } from "react-native";
+import { capitaliseWordAndRemoveSpace } from "./helpers";
 
 const RECIPE_STORAGE_KEY = "RECIPE_STORAGE_KEY";
 const SHOPPING_LIST_STORAGE_KEY = "SHOPPING_LIST_STORAGE_KEY";
@@ -9,7 +10,7 @@ export const getRecipesAsync = async () => {
     // await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
 
     const localStorage = await AsyncStorage.getItem(RECIPE_STORAGE_KEY);
-
+    console.log(JSON.parse(localStorage));
     if (localStorage) {
       return JSON.parse(localStorage);
     } else {
@@ -23,13 +24,28 @@ export const getRecipesAsync = async () => {
 
 export const addRecipeAsync = async (recipe, recipeId) => {
   try {
-    const item = JSON.stringify({
+    let item = {
       [recipeId]: {
         ...recipe,
+        ingredients: {},
       },
-    });
+    };
 
-    await AsyncStorage.mergeItem(RECIPE_STORAGE_KEY, item);
+    for (const [category, list] of Object.entries(recipe.ingredients)) {
+      item[recipeId].ingredients[category] = {};
+
+      for (const ingredient of Object.values(list)) {
+        const id =
+          capitaliseWordAndRemoveSpace(ingredient.item) +
+          "_" +
+          capitaliseWordAndRemoveSpace(recipe.title);
+        item[recipeId].ingredients[category][id] = ingredient;
+      }
+    }
+
+    await AsyncStorage.mergeItem(RECIPE_STORAGE_KEY, JSON.stringify(item));
+    const toSave = item[recipeId];
+    return toSave;
   } catch (e) {
     console.log(e);
   }
@@ -82,7 +98,7 @@ export const addShoppingListAsync = async (shoppingList, title) => {
 export const getShoppingListAsync = async () => {
   try {
     // await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, {});
-    
+
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
 
     if (localStorage) {

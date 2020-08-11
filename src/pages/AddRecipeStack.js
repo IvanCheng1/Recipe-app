@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import AddRecipePage from './AddRecipePage';
+import AddRecipePage from "./AddRecipePage";
 
 const Stack = createStackNavigator();
 
@@ -26,4 +26,4 @@ const AddRecipeStack = () => {
   );
 };
 
-export default AddRecipeStack
+export default AddRecipeStack;
