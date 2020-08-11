@@ -92,14 +92,25 @@ class ShoppingListPage extends Component {
               checked={details.checked}
               onPress={() => this.toggleCheck(category, itemId)}
             />
-            <Text
-              style={[
-                myStyles.shoppingItemDescription,
-                details.checked && myStyles.shoppingItemDescriptionCrossed,
-              ]}
-            >
-              {details.quantity} {capitaliseWord(details.item)}
-            </Text>
+            <View style={myStyles.shoppingItemDescription}>
+              <Text
+                style={
+                  details.checked && myStyles.shoppingItemDescriptionCrossed
+                }
+              >
+                {details.quantity} {capitaliseWord(details.item)}
+              </Text>
+              {details.for && (
+                <Text
+                  style={[
+                    myStyles.shoppingItemDescriptionFor,
+                    details.checked && myStyles.shoppingItemDescriptionCrossed,
+                  ]}
+                >
+                  {details.for}
+                </Text>
+              )}
+            </View>
             <TouchableOpacity
               style={myStyles.shoppingListBin}
               // key={`${itemId}-trash`}

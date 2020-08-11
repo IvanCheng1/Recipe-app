@@ -4,72 +4,60 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        RapeseedOil: {
+        RapeseedOil_EdamameBeanPasta: {
           item: "rapeseed oil",
-          quantity: 2,
-          unit: "tbsp",
+          quantity: "2 tbsp",
         },
-        PeanutButter: {
+        PeanutButter_EdamameBeanPasta: {
           item: "peanut butter",
-          quantity: 6,
-          unit: "tbsp",
+          quantity: "6 tbsp",
         },
-        SoySauce: {
+        SoySauce_EdamameBeanPasta: {
           item: "soy sauce",
-          quantity: 1,
-          unit: "tbsp",
+          quantity: "1 tbsp",
         },
-        VegStockCube: {
+        VegStockCube_EdamameBeanPasta: {
           item: "veg stock cube",
-          quantity: 1,
-          unit: "",
+          quantity: "1",
         },
       },
       Colds: {},
       Vegetables: {
-        Tomatoes: {
+        Tomatoes_EdamameBeanPasta: {
           item: "tomatoes",
-          quantity: 6,
-          unit: "",
+          quantity: "6",
         },
-        Onions: {
+        Onions_EdamameBeanPasta: {
           item: "onions",
-          quantity: 2,
-          unit: "",
+          quantity: "2",
         },
-        Garlic: {
+        Garlic_EdamameBeanPasta: {
           item: "garlic",
-          quantity: 2,
-          unit: "cloves",
+          quantity: "2 cloves",
         },
-        RedChilli: {
+        RedChilli_EdamameBeanPasta: {
           item: "red chilli",
-          quantity: 1,
-          unit: "",
+          quantity: '1',
         },
-        SpringOnions: {
+        SpringOnions_EdamameBeanPasta: {
           item: "spring onions",
-          quantity: 1,
-          unit: "bunch",
+          quantity: "1 bunch",
         },
       },
       Frozen: {
-        EdemameBeans: {
+        EdemameBeans_EdamameBeanPasta: {
           item: "edamame beans",
-          quantity: 3,
-          unit: "mugs",
+          quantity: "3 mugs",
         },
       },
       Dry: {
-        Pasta: {
+        Pasta_EdamameBeanPasta: {
           item: "pasta",
-          quantity: 500,
-          unit: "grams",
+          quantity: "500g",
         },
-        Cornflour: {
+        Cornflour_EdamameBeanPasta: {
           item: "cornflour",
-          quantity: 1,
-          unit: "tbsp",
+          quantity: "1 tbsp",
         },
       },
       Other: {},
@@ -83,37 +71,31 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        CurryPowder: {
+        CurryPowder_KatsuCurry: {
           item: "curry powder",
-          quantity: 20,
-          unit: "grams",
+          quantity: "20g",
         },
-        Pepper: {
+        Pepper_KatsuCurry: {
           item: "pepper",
-          quantity: 1,
-          unit: "tbsp",
-
+          quantity: "1 tbsp",
         },
       },
       Colds: {},
       Vegetables: {
-        Cauliflower: {
+        Cauliflower_KatsuCurry: {
           item: "cauliflower",
           quantity: 1,
-          unit: "",
         },
       },
       Frozen: {},
       Dry: {
-        Rice: {
+        Rice_KatsuCurry: {
           item: "rice",
-          quantity: 500,
-          unit: "grams",
+          quantity: "500g",
         },
-        Cornflour: {
+        Cornflour_KatsuCurry: {
           item: "cornflour",
-          quantity: 1,
-          unit: "tbsp",
+          quantity: '1 tbsp',
         },
       },
       Other: {},
@@ -127,31 +109,27 @@ export const recipes = {
     course: "main",
     ingredients: {
       Spices: {
-        Pepper: {
+        Pepper_LentilRagu: {
           item: "pepper",
-          quantity: 1,
-          unit: "tbsp",
+          quantity: "1 tbsp",
         },
       },
       Colds: {},
       Vegetables: {
-        Carrots: {
+        Carrots_LentilRagu: {
           item: "carrots",
           quantity: 2,
-          unit: "",
         },
       },
       Frozen: {},
       Dry: {
-        ChoppedTomatoes: {
+        ChoppedTomatoes_LentilRagu: {
           item: "chopped tomatoes",
           quantity: 1,
-          unit: "",
         },
-        Passata: {
+        Passata_LentilRagu: {
           item: "passata",
           quantity: 1,
-          unit: "",
         },
       },
       Other: {},

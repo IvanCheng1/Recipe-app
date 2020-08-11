@@ -12,9 +12,9 @@ function addShopping(list) {
   };
 }
 
-export function handleAddShopping(list) {
+export function handleAddShopping(list, title) {
   return (dispatch) => {
-    return addShoppingListAsync(list).then((list) => {
+    return addShoppingListAsync(list, title).then((list) => {
       dispatch(addShopping(list));
     });
   };

@@ -33,11 +33,6 @@ class RecipeShoppingList extends Component {
         items.push(
           <View key={item.item} style={myStyles.recipeItemGroup}>
             <Text style={myStyles.recipeItemQuan}>{item.quantity}</Text>
-            {item.unit ? (
-              <Text style={myStyles.recipeItemUnit}>{item.unit}</Text>
-            ) : (
-              <View></View>
-            )}
             <Text style={myStyles.recipeItem}>{capitaliseWord(item.item)}</Text>
           </View>
         );

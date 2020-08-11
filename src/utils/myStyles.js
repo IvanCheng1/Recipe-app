@@ -210,16 +210,24 @@ export const myStyles = StyleSheet.create({
     margin: 10,
   },
   shoppingListItem: {
+    // flexDirection: "row",
     // borderColor: "#f4511e",
     // borderWidth: 1,
     // borderRadius: 10,
     // width: windowWidth * 0.95,
+    // flex: 1,
+    // padding: 0,
   },
   checkBox: {
     marginRight: 15,
   },
   shoppingItemDescription: {
     flex: 1,
+  },
+  shoppingItemDescriptionFor: {
+    color: "grey",
+    fontSize: 13,
+    // paddingLeft: 5,
   },
   shoppingItemDescriptionCrossed: {
     textDecorationLine: 'line-through',

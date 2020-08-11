@@ -47,7 +47,7 @@ export const deleteRecipeAsync = async (recipeId) => {
   }
 };
 
-export const addShoppingListAsync = async (shoppingList) => {
+export const addShoppingListAsync = async (shoppingList, title) => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
     const prev = JSON.parse(localStorage);
@@ -57,18 +57,14 @@ export const addShoppingListAsync = async (shoppingList) => {
     };
 
     for (const [category, list] of Object.entries(shoppingList)) {
-      // toSave[category] = []
-      for (const [itemId, item] of Object.entries(list)) {
-        if (toSave[category][itemId]) {
-          // basic adding prev quantity to new quantity
-          toSave[category][itemId].quantity =
-            toSave[category][itemId].quantity + item.quantity;
+      if (!toSave[category]) {
+        toSave[category] = {};
+      }
 
-          // set item to be unchecked on shopping list
-          toSave[category][itemId].checked = false;
-        } else {
-          toSave[category][itemId] = item;
-        }
+      for (const [itemId, item] of Object.entries(list)) {
+        toSave[category][itemId] = item;
+        toSave[category][itemId].checked = false;
+        toSave[category][itemId].for = title;
       }
     }
 
@@ -85,6 +81,8 @@ export const addShoppingListAsync = async (shoppingList) => {
 
 export const getShoppingListAsync = async () => {
   try {
+    // await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, {});
+    
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
 
     if (localStorage) {

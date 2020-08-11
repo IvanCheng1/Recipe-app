@@ -39,8 +39,8 @@ class RecipePage extends Component {
     this.props.navigation.navigate("Home");
   };
 
-  onAddToShoppinglist = (recipe) => {
-    this.props.dispatch(handleAddShopping(recipe));
+  onAddToShoppinglist = (recipe, title) => {
+    this.props.dispatch(handleAddShopping(recipe, title));
     Toast.showSuccess("Added to Shopping List!");
   };
 
@@ -71,7 +71,7 @@ class RecipePage extends Component {
 
           <TouchableOpacity
             style={myStyles.btn}
-            onPress={() => this.onAddToShoppinglist(item.ingredients)}
+            onPress={() => this.onAddToShoppinglist(item.ingredients, item.title)}
           >
             <Text style={myStyles.btnText}>Add to Shopping List</Text>
           </TouchableOpacity>
