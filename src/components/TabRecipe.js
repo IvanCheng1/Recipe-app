@@ -68,7 +68,6 @@ class TabRecipe extends Component {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "position" : "height"}
-        // style={myStyles.container}
         keyboardVerticalOffset={64}
       >
         <ScrollView>

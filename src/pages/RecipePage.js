@@ -63,20 +63,14 @@ class RecipePage extends Component {
         <ScrollView>
           <View style={myStyles.container}>
             <Image style={myStyles.imageRecipe} source={image} />
-            {/* <Text style={myStyles.title}>{capitaliseWord(item.title)}</Text> */}
+
             {item.notes !== "" && (
               <Text style={myStyles.notes}>From: {item.notes}</Text>
             )}
-            {/* <Text style={myStyles.recipePadding}></Text> */}
-            {/* <View style={myStyles.box}> */}
 
             <Card style={myStyles.recipeCard}>
-              {/* <CardItem style={[myStyles.container, {flex: 1}, myStyles.box]}> */}
               <RecipeShoppingList id={id} />
-              {/* </CardItem> */}
             </Card>
-
-            {/* </View> */}
 
             {/* <TouchableOpacity
             style={myStyles.btn}

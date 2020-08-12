@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myStyles } from "../utils/myStyles";
 import {
-  Text,
   View,
   SafeAreaView,
   FlatList,
