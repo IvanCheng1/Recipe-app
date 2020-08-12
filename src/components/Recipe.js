@@ -19,7 +19,7 @@ class Recipe extends Component {
       : require("../images/plate.jpg");
 
     return (
-      <View style={[myStyles.recipeContainer, myStyles.box]}>
+      <View style={myStyles.recipeContainer}>
         <Image style={myStyles.imageList} source={image} />
         <Text style={myStyles.recipeTitle}>{capitaliseWord(recipe.title)}</Text>
         <Text style={myStyles.receipeNotes}>{recipe.notes}</Text>

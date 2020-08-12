@@ -23,8 +23,9 @@ export const myStyles = StyleSheet.create({
     // alignItems: "flex-start",
   },
   imageList: {
-    width: windowHalfWidth * 0.95,
-    height: windowHalfWidth * 0.95,
+    width: windowHalfWidth * 0.99,
+    height: windowHalfWidth * 0.99,
+    // borderRadius: 10,
   },
   box: {
     borderColor: "grey",
@@ -35,8 +36,12 @@ export const myStyles = StyleSheet.create({
     paddingBottom: 5,
     width: windowHalfWidth,
     // height: windowHalfWidth + 50,
+    // height: 100%,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 5,
+    // borderColor: "grey",
   },
   recipeTitle: {
     fontSize: 20,
