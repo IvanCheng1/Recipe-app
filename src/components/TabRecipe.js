@@ -24,24 +24,34 @@ function mapStateToProps(
 }
 
 class TabRecipe extends Component {
-  state = {
-    input: [],
+  checkAndAddInputFields = () => {
+    const {
+      category,
+      onChangeItem,
+      onChangeQty,
+      addInput,
+      input,
+      values,
+    } = this.props;
+
+    const currentCatId = `${category}${input[category].length}`;
+
+    const currentInputFields = values[category][currentCatId];
+    if (currentInputFields) {
+      if (
+        currentInputFields.item !== "" &&
+        currentInputFields.quantity !== ""
+      ) {
+        // add new field
+        addInput(
+          input[category].length + 1,
+          category,
+          onChangeItem,
+          onChangeQty
+        );
+      }
+    }
   };
-
-  // addInput = (key, category, onChangeItem, onChangeQty) => {
-  //   let input = this.state.input;
-
-  //   input.push(
-  //     <RecipeItemInput
-  //       key={`${category}${key}`}
-  //       id={`${category}${key}`}
-  //       category={category}
-  //       onChangeItem={onChangeItem}
-  //       onChangeQty={onChangeQty}
-  //     />
-  //   );
-  //   this.setState({ input: input });
-  // };
 
   render() {
     const {
@@ -52,22 +62,16 @@ class TabRecipe extends Component {
       input,
       values,
     } = this.props;
-    // const { input } = this.state;
 
-    // console.log(values[category][`${category}0`] ? values[category][`${category}0`] : "nothing")
-
-    // if (input[category].length === 0) {
-
-    //   addInput(0, category, onChangeItem, onChangeQty)
-    // }
+    // this.checkAndAddInputFields();
 
     return (
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "position" : "height"}
-          // style={myStyles.container}
-          keyboardVerticalOffset={64}
-        >
-      <ScrollView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "position" : "height"}
+        // style={myStyles.container}
+        keyboardVerticalOffset={64}
+      >
+        <ScrollView>
           <View style={myStyles.addRecipeContainer}>
             <RecipeItemInput
               id={`${category}0`}
@@ -82,25 +86,23 @@ class TabRecipe extends Component {
               }
             />
 
-            {/* {input[category] && input[category].map((value) => {
-            return value;
-          })} */}
             {input[category]}
           </View>
-          <Button
-            title="Add another row"
-            onPress={() =>
-              // this.addInput(input.length + 1, category, onChangeItem, onChangeQty)
-              addInput(
-                input[category].length + 1,
-                category,
-                onChangeItem,
-                onChangeQty
-              )
-            }
-          />
-      </ScrollView>
-        </KeyboardAvoidingView>
+          <View style={{alignItems: "center"}}>
+            <Button
+              title="Add another row"
+              onPress={() =>
+                addInput(
+                  input[category].length + 1,
+                  category,
+                  onChangeItem,
+                  onChangeQty
+                )
+              }
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

@@ -3,24 +3,22 @@ import {
   GET_SHOPPING_LIST,
   TOGGLE_SHOPPING_LIST,
   REMOVE_SHOPPING_LIST_ITEM,
+  RECEIVE_EMPTY_SHOPPING_LIST,
 } from "../actions/shoppingList";
 
 export default function shoppingList(state = {}, action) {
   switch (action.type) {
     case ADD_SHOPPING_LIST:
-      // console.log("\n\n\n\nHERE\n\n\n\n",action)
       return {
         ...state,
         ...action.list,
       };
     case GET_SHOPPING_LIST:
-      // console.log("\n\n\n\nHERE\n\n\n\n",action)
       return {
         ...state,
         ...action.list,
       };
     case TOGGLE_SHOPPING_LIST:
-      // console.log(action)
       return {
         ...state,
         ...action.list,
@@ -30,6 +28,8 @@ export default function shoppingList(state = {}, action) {
       return {
         ...state,
       }
+    case RECEIVE_EMPTY_SHOPPING_LIST:
+      return {}
     default:
       return state;
   }

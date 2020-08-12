@@ -4,6 +4,7 @@ import {
   toggleCheckShoppingListAsync,
   deleteShoppingListItemAsync,
   addItemShoppingListAsync,
+  clearShoppingListAsync,
 } from "../utils/api";
 
 export const ADD_SHOPPING_LIST = "ADD_SHOPPING_LIST";
@@ -11,6 +12,7 @@ export const ADD_ITEM_SHOPPING_LIST = "ADD_ITEM_SHOPPING_LIST";
 export const GET_SHOPPING_LIST = "GET_SHOPPING_LIST";
 export const TOGGLE_SHOPPING_LIST = "TOGGLE_SHOPPING_LIST";
 export const REMOVE_SHOPPING_LIST_ITEM = "REMOVE_SHOPPING_LIST_ITEM";
+export const RECEIVE_EMPTY_SHOPPING_LIST = "RECEIVE_EMPTY_SHOPPING_LIST";
 
 function addShopping(list) {
   return {
@@ -77,6 +79,20 @@ export function handleDeleteShoppingListItem(category, itemId) {
   return (dispatch) => {
     return deleteShoppingListItemAsync(category, itemId).then(() => {
       dispatch(removeShoppingListItem(category, itemId));
+    });
+  };
+}
+
+function receiveEmptyShoppingList() {
+  return {
+    type: RECEIVE_EMPTY_SHOPPING_LIST,
+  };
+}
+
+export function handleClearShoppingList() {
+  return (dispatch) => {
+    return clearShoppingListAsync().then(() => {
+      dispatch(receiveEmptyShoppingList());
     });
   };
 }

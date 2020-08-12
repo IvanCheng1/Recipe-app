@@ -147,7 +147,6 @@ export const getShoppingListAsync = async () => {
   }
 };
 
-
 // when user ticks/untick from the shopping list
 export const toggleCheckShoppingListAsync = async (category, itemId) => {
   try {
@@ -194,6 +193,15 @@ export const deleteShoppingListItemAsync = async (category, itemId) => {
       JSON.stringify(shoppingList)
     );
     // return shoppingList
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// clear shopping list
+export const clearShoppingListAsync = async () => {
+  try {
+    await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify({}));
   } catch (e) {
     console.log(e);
   }

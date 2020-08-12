@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myStyles } from "../utils/myStyles";
-import { Text, View, TouchableOpacity } from "react-native";
-// import { CheckBox } from "react-native-elements";
-// import CheckBox from "react-native-check-box";
+import { Text, View, TouchableOpacity, Alert, Button } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { ListItem, CheckBox, Fab, Icon } from "native-base";
 import { capitaliseWord } from "../utils/helpers";
@@ -12,6 +10,7 @@ import {
   handleGetShopping,
   handleToggleCheckShopping,
   handleDeleteShoppingListItem,
+  handleClearShoppingList,
 } from "../actions/shoppingList";
 
 function mapStateToProps({ shoppingList }) {
@@ -34,11 +33,26 @@ class ShoppingListPage extends Component {
   };
 
   onClickAddItem = () => {
-    // alert("feature coming");
-    this.props.navigation.navigate("Add Item")
+    this.props.navigation.navigate("Add Item");
   };
 
-  addItem = () => {};
+  clearAll = () => {
+    Alert.alert(
+      "Clear All",
+      "Are you sure you want to clear all?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Ok",
+          onPress: () => this.props.dispatch(handleClearShoppingList()),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   render() {
     const ingredients = this.props.shoppingList;
@@ -117,6 +131,13 @@ class ShoppingListPage extends Component {
         ) : (
           <ScrollView>
             <View>{shoppingList}</View>
+            <View style={{ alignItems: "center", margin: 20 }}>
+              <Button
+                title="Clear All"
+                onPress={() => this.clearAll()}
+              />
+               
+            </View>
           </ScrollView>
         )}
         <Fab

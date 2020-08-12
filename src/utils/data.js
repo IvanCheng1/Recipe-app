@@ -31,10 +31,6 @@ export const recipes = {
           item: "onions",
           quantity: "2",
         },
-        Garlic_EdamameBeanPasta: {
-          item: "garlic",
-          quantity: "2 cloves",
-        },
         RedChilli_EdamameBeanPasta: {
           item: "red chilli",
           quantity: '1',
@@ -51,6 +47,10 @@ export const recipes = {
         },
       },
       Dry: {
+        Garlic_EdamameBeanPasta: {
+          item: "garlic",
+          quantity: "2 cloves",
+        },
         Pasta_EdamameBeanPasta: {
           item: "pasta",
           quantity: "500g",
@@ -62,7 +62,7 @@ export const recipes = {
       },
       Other: {},
     },
-    notes: "Not too difficult, but takes a while to make",
+    notes: "Jamie Oliver Cook Book",
     image:
       "https://image.shutterstock.com/z/stock-photo-italian-cuisine-edamame-and-mentaiko-pasta-on-white-background-128504978.jpg",
   },
@@ -100,7 +100,7 @@ export const recipes = {
       },
       Other: {},
     },
-    notes: "Takes a lot of effort",
+    notes: "Nosh For Students",
     image:
       "https://image.shutterstock.com/z/stock-photo-rice-with-deep-fried-pork-and-curry-in-japanese-style-or-katsu-kare-in-white-plate-ready-to-eat-665181721.jpg",
   },
@@ -134,7 +134,7 @@ export const recipes = {
       },
       Other: {},
     },
-    notes: "Slow cooker for 5h on low",
+    notes: "BBC Good Food",
     image:
       "https://image.shutterstock.com/z/stock-photo-lentil-ragu-vegan-lentil-bolognese-in-a-pan-rustic-food-1335686036.jpg",
   },

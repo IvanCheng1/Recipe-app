@@ -250,7 +250,7 @@ class AddRecipePage extends Component {
                   <TextInput
                     value={this.state.notes}
                     style={myStyles.input}
-                    placeholder="Notes"
+                    placeholder="Source"
                     onChangeText={(input) => this.setState({ notes: input })}
                   />
                 </View>

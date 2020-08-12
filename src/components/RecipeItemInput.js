@@ -26,7 +26,7 @@ class RecipeItemInput extends Component {
 
     if (values) {
       return (
-        <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+        <View key={id} style={myStyles.inputRecipeGroup}>
           <TextInput
             style={myStyles.inputItemLeft}
             placeholder="Item..."
@@ -43,18 +43,16 @@ class RecipeItemInput extends Component {
       );
     } else {
       return (
-        <View key={id} style={[myStyles.box, myStyles.inputRecipeGroup]}>
+        <View key={id} style={myStyles.inputRecipeGroup}>
           <TextInput
             style={myStyles.inputItemLeft}
             placeholder="Item..."
             onChangeText={(input) => onChangeItem(input, id, category)}
-
           />
           <TextInput
             style={myStyles.inputQuantityRight}
             placeholder="Qty"
             onChangeText={(input) => onChangeQty(input, id, category)}
-
           />
         </View>
       );

@@ -51,6 +51,16 @@ export const myStyles = StyleSheet.create({
     color: "#f4511e",
     textAlign: "center",
   },
+  recipeCard: {
+    flex: 1,
+    width: windowWidth * 0.8,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 15,
+    paddingBottom: 15,
+    shadowOpacity: 0.4,
+  },
   title: {
     fontSize: 28,
     lineHeight: 36,
@@ -64,13 +74,21 @@ export const myStyles = StyleSheet.create({
     marginBottom: 20,
     color: "#f88967",
   },
+  notes: {
+    fontSize: 22,
+    lineHeight: 24,
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#f88967",
+  },
   imageRecipe: {
     width: windowWidth,
     height: windowHeight / 3,
     resizeMode: "cover",
   },
   recipeShoppingList: {
-    width: "60%",
+    width: "85%",
   },
   recipePadding: {
     lineHeight: 20,
@@ -95,7 +113,7 @@ export const myStyles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "flex-start",
     borderColor: "grey",
-    borderWidth: 1,
+    borderWidth: 0.4,
     borderRadius: 6,
     height: 30,
   },
@@ -105,20 +123,14 @@ export const myStyles = StyleSheet.create({
     textAlign: "left",
     marginRight: 5,
     marginLeft: 4,
-    // width: 50
-  },
-  recipeItemUnit: {
-    fontSize: 16,
-    lineHeight: 25,
-    textAlign: "left",
-    marginRight: 5,
-    // marginLeft: 4,
-    // width: 50
+    fontWeight: "400",
+    color: "grey"
   },
   recipeItem: {
     fontSize: 16,
     lineHeight: 25,
     textAlign: "left",
+    fontWeight: "500",
   },
   btn: {
     backgroundColor: "#f56436",

@@ -8,6 +8,7 @@ import { capitaliseWord } from "../utils/helpers";
 import { handleDeleteRecipes } from "../actions/recipes";
 import { handleAddShopping } from "../actions/shoppingList";
 import Toast from "react-native-tiny-toast";
+import { Card, Fab, Icon } from "native-base";
 
 function mapStateToProps({ recipes }) {
   return {
@@ -58,37 +59,48 @@ class RecipePage extends Component {
       : require("../images/plate.jpg");
 
     return (
-      <ScrollView>
-        <View style={myStyles.container}>
-          <Image style={myStyles.imageRecipe} source={image} />
-          <Text style={myStyles.title}>{capitaliseWord(item.title)}</Text>
-          {item.notes !== "" && (
-            <Text style={myStyles.subtitle}>"{item.notes}"</Text>
-          )}
-          {/* <Text style={myStyles.recipePadding}></Text> */}
+      <View style={myStyles.container}>
+        <ScrollView>
+          <View style={myStyles.container}>
+            <Image style={myStyles.imageRecipe} source={image} />
+            {/* <Text style={myStyles.title}>{capitaliseWord(item.title)}</Text> */}
+            {item.notes !== "" && (
+              <Text style={myStyles.notes}>From: {item.notes}</Text>
+            )}
+            {/* <Text style={myStyles.recipePadding}></Text> */}
+            {/* <View style={myStyles.box}> */}
 
-          <RecipeShoppingList id={id} />
+            <Card style={myStyles.recipeCard}>
+              {/* <CardItem style={[myStyles.container, {flex: 1}, myStyles.box]}> */}
+              <RecipeShoppingList id={id} />
+              {/* </CardItem> */}
+            </Card>
 
-          <TouchableOpacity
-            style={myStyles.btn}
-            onPress={() => this.onAddToShoppinglist(item.ingredients, item.title)}
-          >
-            <Text style={myStyles.btnText}>Add to Shopping List</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            {/* </View> */}
+
+            {/* <TouchableOpacity
             style={myStyles.btn}
             onPress={() => alert("Edit Recipe")}
-          >
+            >
             <Text style={myStyles.btnText}>Edit Recipe</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[myStyles.btn, myStyles.btnDark]}
-            onPress={() => this.confirmDelete(id)}
-          >
-            <Text style={myStyles.btnText}>Delete Recipe</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+          </TouchableOpacity> */}
+            <TouchableOpacity
+              style={myStyles.btn}
+              onPress={() =>
+                this.onAddToShoppinglist(item.ingredients, item.title)
+              }
+            >
+              <Text style={myStyles.btnText}>Add to Shopping List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[myStyles.btn, myStyles.btnDark]}
+              onPress={() => this.confirmDelete(id)}
+            >
+              <Text style={myStyles.btnText}>Delete Recipe</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }

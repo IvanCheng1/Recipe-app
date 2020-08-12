@@ -30,11 +30,6 @@ class Recipes extends Component {
       recipes: this.props.recipes,
     });
 
-    // this.props.dispatch(handleReceiveRecipes()).then(() => {
-    // const recipes = this.props.recipes;
-    // console.log(recipes, "here")
-    // this.setState({ recipes: this.props.recipes });
-    // });
   }
 
   onChangeSearch = (query) => {
