@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { myStyles } from "../utils/myStyles";
 import { Text, View } from "react-native";
 import { capitaliseWord } from "../utils/helpers";
+import { Card } from "native-base";
 
 function mapStateToProps({ recipes }, { id }) {
   return {

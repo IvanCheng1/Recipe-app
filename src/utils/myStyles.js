@@ -63,7 +63,8 @@ export const myStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 15,
-    paddingBottom: 15,
+    paddingBottom: 25,
+    marginBottom: 10,
     shadowOpacity: 0.4,
   },
   title: {
