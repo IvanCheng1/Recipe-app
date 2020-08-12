@@ -29,7 +29,6 @@ class Recipes extends Component {
     this.setState({
       recipes: this.props.recipes,
     });
-
   }
 
   onChangeSearch = (query) => {
@@ -106,8 +105,6 @@ class Recipes extends Component {
     } else {
       recipes = this.props.recipes;
     }
-
-    // const { recipes } = this.props;
 
     return (
       <SafeAreaView style={myStyles.container}>
