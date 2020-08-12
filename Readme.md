@@ -3,8 +3,8 @@
 A simple recipe app that allows the user to quickly add recipe ingredients to the shopping list. Recipes can be added from the 'Add Recipe' tab.
 
 <p align="center">
-  <img src="./src/gifs/android-example.gif" height='600'/>
-  <img src="./src/gifs/ios-example.gif" height='600'/>
+  <img src="./src/gifs/android-example.gif" height='500'/>
+  <img src="./src/gifs/ios-example.gif" height='500'/>
 </p>
 
 ## Instructions
