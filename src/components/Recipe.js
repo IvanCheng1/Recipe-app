@@ -9,9 +9,6 @@ function mapStateToProps(state, { recipe }) {
 }
 
 class Recipe extends Component {
-  state = {};
-
-  componentDidMount() {}
   render() {
     const { recipe } = this.props;
     const image = recipe.image
