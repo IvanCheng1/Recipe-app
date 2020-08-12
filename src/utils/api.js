@@ -47,7 +47,6 @@ export const addRecipeAsync = async (recipe, recipeId) => {
 
     await AsyncStorage.mergeItem(RECIPE_STORAGE_KEY, JSON.stringify(item));
     const toSave = item[recipeId];
-    console.log(toSave)
     return toSave;
   } catch (e) {
     console.log(e);
