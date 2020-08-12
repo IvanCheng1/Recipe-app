@@ -5,6 +5,7 @@ import { capitaliseWordAndRemoveSpace } from "./helpers";
 const RECIPE_STORAGE_KEY = "RECIPE_STORAGE_KEY";
 const SHOPPING_LIST_STORAGE_KEY = "SHOPPING_LIST_STORAGE_KEY";
 
+// get all recipe from async
 export const getRecipesAsync = async () => {
   try {
     // await AsyncStorage.setItem(RECIPE_STORAGE_KEY, JSON.stringify(recipes));
@@ -22,6 +23,7 @@ export const getRecipesAsync = async () => {
   }
 };
 
+// add recipe to async
 export const addRecipeAsync = async (recipe, recipeId) => {
   try {
     let item = {
@@ -51,6 +53,7 @@ export const addRecipeAsync = async (recipe, recipeId) => {
   }
 };
 
+// delete recipe from async
 export const deleteRecipeAsync = async (recipeId) => {
   try {
     const localStorage = await AsyncStorage.getItem(RECIPE_STORAGE_KEY);
@@ -63,6 +66,7 @@ export const deleteRecipeAsync = async (recipeId) => {
   }
 };
 
+// add the entire recipe shopping list to async
 export const addShoppingListAsync = async (shoppingList, title) => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
@@ -95,6 +99,7 @@ export const addShoppingListAsync = async (shoppingList, title) => {
   }
 };
 
+// this adds a single item to the shopping list
 export const addItemShoppingListAsync = async (item, quantity, category) => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
@@ -114,21 +119,6 @@ export const addItemShoppingListAsync = async (item, quantity, category) => {
       },
     };
 
-    console.log(toSave);
-    // console.log(item, quantity, category)
-
-    // for (const [category, list] of Object.entries(shoppingList)) {
-    //   if (!toSave[category]) {
-    //     toSave[category] = {};
-    //   }
-
-    //   for (const [itemId, item] of Object.entries(list)) {
-    //     toSave[category][itemId] = item;
-    //     toSave[category][itemId].checked = false;
-    //     toSave[category][itemId].for = title;
-    //   }
-    // }
-
     await AsyncStorage.setItem(
       SHOPPING_LIST_STORAGE_KEY,
       JSON.stringify(toSave)
@@ -140,6 +130,7 @@ export const addItemShoppingListAsync = async (item, quantity, category) => {
   }
 };
 
+// get shopping list from async
 export const getShoppingListAsync = async () => {
   try {
     // await AsyncStorage.setItem(SHOPPING_LIST_STORAGE_KEY, JSON.stringify({}));
@@ -156,6 +147,8 @@ export const getShoppingListAsync = async () => {
   }
 };
 
+
+// when user ticks/untick from the shopping list
 export const toggleCheckShoppingListAsync = async (category, itemId) => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
@@ -186,6 +179,7 @@ export const toggleCheckShoppingListAsync = async (category, itemId) => {
   }
 };
 
+// delete single item in shopping list
 export const deleteShoppingListItemAsync = async (category, itemId) => {
   try {
     const localStorage = await AsyncStorage.getItem(SHOPPING_LIST_STORAGE_KEY);
